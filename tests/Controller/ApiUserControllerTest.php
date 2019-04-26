@@ -23,16 +23,16 @@ class ApiUserControllerTest extends WebTestCase
     }
 
     /**
-     * Implements @testGetLogin
-     * @covers ::getLogin
+     * Implements @testLogin
+     * @covers ::login
      */
-    public function testGetLogin(): void {
+    public function testLogin(): void {
         $data = [
-            'name'=> 'user1',
+            'username'=> 'user1',
             'password'=> 'user1'
         ];
 
-        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
+        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH . ApiUserController::LOGIN,
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
 
@@ -42,22 +42,22 @@ class ApiUserControllerTest extends WebTestCase
     }
 
     /**
-     * Implements @testGetLoginError
-     * @covers ::getLogin
+     * Implements @testLoginError
+     * @covers ::login
      */
-    public function testGetLoginError(): void {
+    public function testLoginError(): void {
         //Test user with invalid pass
         $data1 = [
-            'name'=> 'user1',
+            'username'=> 'user1',
             'password'=> 'user'
         ];
         //Test user not found
         $data2 = [
-            'name'=> 'user',
+            'username'=> 'user',
             'password'=> 'user'
         ];
 
-        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
+        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH . ApiUserController::LOGIN,
             [], [], [], json_encode($data1));
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
 
@@ -68,5 +68,40 @@ class ApiUserControllerTest extends WebTestCase
         self::assertArrayHasKey('code', $message);
         self::assertArrayHasKey('message', $message);
         self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
+    }
+
+    /**
+     * Implements testRegister
+     * @return int
+     * @covers ::register
+     */
+    public function testRegister(): int {
+        $data = [
+            'username'=> 'user',
+            'password'=>'user',
+            'name'=>'user',
+            'surname'=>'u'
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
+            [],[],[],json_encode($data));
+        self::assertEquals(Response::HTTP_CREATED, self::$client->getResponse()->getStatusCode());
+
+        $body = self::$client->getResponse()->getContent();
+        $dataDecoder = json_decode($body, true);
+        return $dataDecoder['user']['id'];
+    }
+
+    public function testRegisterError(): void{
+        $data = [
+            'username'=> 'user',
+            'password'=>'user',
+            'name'=>'user',
+            'surname'=>'u'
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
+            [],[],[],json_encode($data));
+        self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
     }
 }

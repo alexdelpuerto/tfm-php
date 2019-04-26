@@ -18,22 +18,56 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiUserController extends AbstractController {
 
     public const USER_API_PATH = '/api/v1/users';
+    public const LOGIN = '/login';
 
     /**
      * @param Request $request
      * @return Response
-     * @Route(path="", name="login", methods={"POST"})
+     * @Route(path="/login", name="login", methods={"POST"})
      */
-    public function getLogin(Request $request): Response{
+    public function login(Request $request): Response{
         $dataRequest = $request->getContent();
         $data = json_decode($dataRequest, true);
 
         $em = $this->getDoctrine()->getManager();
-        $userId = $em->getRepository(User::class)->findOneBy(array('name' => $data['name'], 'password' => $data['password']));
+        $userId = $em->getRepository(User::class)->findOneBy(array('username' => $data['username'], 'password' => $data['password']));
 
         return ($userId === null)
             ? $this->error404()
             : new JsonResponse(Response::HTTP_OK);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route(path="", name="register", methods={"POST"})
+     */
+    public function register(Request $request): Response{
+        $dataRequest = $request->getContent();
+        $data = json_decode($dataRequest, true);
+
+        $user = new User(
+            $data['username'],
+            $data['password'],
+            $data['name'],
+            $data['surname']
+        );
+
+        $em = $this->getDoctrine()->getManager();
+        $usernameExist = $em->getRepository(User::class)->findOneBy(array('username' => $data['username']));
+
+        if($usernameExist !== null){
+            return $this->error400();
+        }
+        else{
+            $em->persist($user);
+            $em->flush();
+
+            return new JsonResponse(
+                ['user'=>$user],
+                Response::HTTP_CREATED
+            );
+        }
     }
 
     public function error404(): JsonResponse{
@@ -42,5 +76,13 @@ class ApiUserController extends AbstractController {
             'message' => "El usuario no existe o la contraseña es incorrecta"
         ];
         return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+    }
+
+    private function error400(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_BAD_REQUEST,
+            'message' => 'El nombre de usuario ya existe'
+        ];
+        return new JsonResponse($message, Response::HTTP_BAD_REQUEST);
     }
 }
