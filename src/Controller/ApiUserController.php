@@ -24,7 +24,7 @@ class ApiUserController extends AbstractController {
      * @return Response
      * @Route(path="", name="login", methods={"POST"})
      */
-    public function getLogin(Request $request): Response{
+    public function login(Request $request): Response{
         $dataRequest = $request->getContent();
         $data = json_decode($dataRequest, true);
 
@@ -36,11 +36,47 @@ class ApiUserController extends AbstractController {
             : new JsonResponse(Response::HTTP_OK);
     }
 
+    public function register(Request $request): Response{
+        $dataRequest = $request->getContent();
+        $data = json_decode($dataRequest, true);
+
+        $user = new User(
+            $data['username'],
+            $data['password'],
+            $data['name'],
+            $data['surname']
+        );
+
+        $em = $this->getDoctrine()->getManager();
+        $usernameExist = $em->getRepository(User::class)->findOneBy(array('username' => $data['username']));
+
+        if($usernameExist !== null){
+            return $this->error400();
+        }
+        else{
+            $em->persist($user);
+            $em->flush();
+
+            return new JsonResponse(
+                ['user'=>$user],
+                Response::HTTP_CREATED
+            );
+        }
+    }
+
     public function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
             'message' => "El usuario no existe o la contraseña es incorrecta"
         ];
         return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+    }
+
+    private function error400(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_BAD_REQUEST,
+            'message' => 'El nombre de usuario ya existe'
+        ];
+        return new JsonResponse($message, Response::HTTP_BAD_REQUEST);
     }
 }

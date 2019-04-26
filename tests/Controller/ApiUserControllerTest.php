@@ -23,10 +23,10 @@ class ApiUserControllerTest extends WebTestCase
     }
 
     /**
-     * Implements @testGetLogin
-     * @covers ::getLogin
+     * Implements @testLogin
+     * @covers ::login
      */
-    public function testGetLogin(): void {
+    public function testLogin(): void {
         $data = [
             'name'=> 'user1',
             'password'=> 'user1'
@@ -42,10 +42,10 @@ class ApiUserControllerTest extends WebTestCase
     }
 
     /**
-     * Implements @testGetLoginError
-     * @covers ::getLogin
+     * Implements @testLoginError
+     * @covers ::login
      */
-    public function testGetLoginError(): void {
+    public function testLoginError(): void {
         //Test user with invalid pass
         $data1 = [
             'name'=> 'user1',
