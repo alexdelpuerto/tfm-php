@@ -22,7 +22,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param Request $request
      * @return Response
-     * @Route(path="", name="login", methods={"GET"})
+     * @Route(path="", name="login", methods={"POST"})
      */
     public function getLogin(Request $request): Response{
         $dataRequest = $request->getContent();
