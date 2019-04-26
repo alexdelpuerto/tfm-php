@@ -32,7 +32,7 @@ class ApiUserControllerTest extends WebTestCase
             'password'=> 'user1'
         ];
 
-        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH,
+        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
 
@@ -57,7 +57,7 @@ class ApiUserControllerTest extends WebTestCase
             'password'=> 'user'
         ];
 
-        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH,
+        self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
             [], [], [], json_encode($data1));
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
 
