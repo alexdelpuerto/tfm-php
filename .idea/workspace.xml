@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d46dc1ef-7126-4b50-b45e-f56986ad8631" name="Default Changelist" comment="Controlador get Eventos issue #5">
+    <list default="true" id="d46dc1ef-7126-4b50-b45e-f56986ad8631" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ApiEventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiEventController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/ApiEventController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="476">
+              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
               <folding>
                 <element signature="e#37#57#0#PHP" expanded="true" />
               </folding>
@@ -54,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="861">
-              <caret line="44" column="51" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
+            <state relative-caret-position="1113">
+              <caret line="53" column="98" selection-start-line="53" selection-start-column="98" selection-end-line="53" selection-end-column="98" />
               <folding>
                 <element signature="e#42#80#0#PHP" expanded="true" />
               </folding>
@@ -69,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
-              <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+            <state relative-caret-position="399">
+              <caret line="40" column="91" selection-start-line="40" selection-start-column="46" selection-end-line="40" selection-end-column="91" />
               <folding>
                 <element signature="e#41#78#0#PHP" expanded="true" />
               </folding>
@@ -125,10 +124,10 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/rest-api_2.http" />
         <option value="$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php" />
         <option value="$PROJECT_DIR$/src/Controller/ApiUserController.php" />
-        <option value="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Entity/Event.php" />
         <option value="$PROJECT_DIR$/src/Controller/ApiEventController.php" />
+        <option value="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" />
       </list>
     </option>
   </component>
@@ -202,7 +201,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+    <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -291,7 +290,15 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.ApiUserControllerTest.testLogin">
+  <component name="RunManager" selected="PHPUnit.ApiEventControllerTest">
+    <configuration name="ApiEventControllerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Controller\ApiEventControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ApiEventControllerTest.testGetEvents" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Controller\ApiEventControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" method="testGetEvents" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="ApiUserControllerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="App\Tests\Controller\ApiUserControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php" scope="Class" />
       <method v="2" />
@@ -306,6 +313,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.ApiEventControllerTest" />
+        <item itemvalue="PHPUnit.ApiEventControllerTest.testGetEvents" />
         <item itemvalue="PHPUnit.ApiUserControllerTest.testLogin" />
         <item itemvalue="PHPUnit.ApiUserControllerTest" />
         <item itemvalue="PHPUnit.ApiUserControllerTest.testGetLoginError" />
@@ -328,7 +337,7 @@
       <workItem from="1556367434252" duration="756000" />
       <workItem from="1556522638085" duration="3989000" />
       <workItem from="1556615359899" duration="15719000" />
-      <workItem from="1556702934882" duration="691000" />
+      <workItem from="1556702934882" duration="1555000" />
     </task>
     <task id="LOCAL-00001" summary="Definida tabla Users issue #1">
       <created>1556099363855</created>
@@ -421,47 +430,53 @@
       <option name="project" value="LOCAL" />
       <updated>1556626601515</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Controlador get Eventos issue #5">
+      <created>1556703761093</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1556703761093</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ApiUserControllerTest - 2019.04.25 at 13h 17m 02s.xml">
-      <configuration name="ApiUserControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 47m 03s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest - 2019.04.26 at 09h 52m 29s.xml">
-      <configuration name="ApiUserControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 47m 51s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest - 2019.04.26 at 09h 55m 17s.xml">
-      <configuration name="ApiUserControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 48m 10s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest_testGetLoginError - 2019.04.26 at 09h 55m 34s.xml">
-      <configuration name="ApiUserControllerTest.testGetLoginError" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 49m 44s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest - 2019.04.26 at 09h 55m 41s.xml">
-      <configuration name="ApiUserControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 50m 21s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest - 2019.04.26 at 11h 34m 35s.xml">
-      <configuration name="ApiUserControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 52m 07s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest - 2019.04.26 at 11h 36m 05s.xml">
-      <configuration name="ApiUserControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 52m 31s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest - 2019.04.26 at 11h 39m 54s.xml">
-      <configuration name="ApiUserControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest_testGetEvents - 2019.05.01 at 11h 53m 39s.xml">
+      <configuration name="ApiEventControllerTest.testGetEvents" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest_testLogin - 2019.04.30 at 12h 55m 44s.xml">
-      <configuration name="ApiUserControllerTest.testLogin" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest - 2019.05.01 at 11h 54m 27s.xml">
+      <configuration name="ApiEventControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="ApiUserControllerTest_testLogin - 2019.04.30 at 12h 56m 18s.xml">
-      <configuration name="ApiUserControllerTest.testLogin" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="ApiEventControllerTest - 2019.05.01 at 11h 54m 47s.xml">
+      <configuration name="ApiEventControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47637000" />
+    <option name="totallyTimeSpent" value="48501000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13219616" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -620,26 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="44" column="51" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
-          <folding>
-            <element signature="e#42#80#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding>
-            <element signature="e#41#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3969">
@@ -662,10 +657,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ApiEventController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        <state relative-caret-position="476">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
           <folding>
             <element signature="e#37#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="40" column="91" selection-start-line="40" selection-start-column="46" selection-end-line="40" selection-end-column="91" />
+          <folding>
+            <element signature="e#41#78#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1113">
+          <caret line="53" column="98" selection-start-line="53" selection-start-column="98" selection-end-line="53" selection-end-column="98" />
+          <folding>
+            <element signature="e#42#80#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
