@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})})
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})}, indexes={@ORM\Index(name="id", columns={"id"})})
  * @ORM\Entity
  */
 class User implements \JsonSerializable
@@ -50,19 +51,36 @@ class User implements \JsonSerializable
     private $surname;
 
     /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Event", inversedBy="user")
+     * @ORM\JoinTable(name="users_events",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $event;
+
+    /**
      * User constructor.
      * @param string $username
      * @param string $password
      * @param string|null $name
      * @param string|null $surname
+     * @param Collection $event
      */
-    public function __construct(string $username, string $password, ?string $name, ?string $surname)
+    public function __construct(string $username, string $password, ?string $name, ?string $surname, Collection $event)
     {
         $this->id = 0;
         $this->username = $username;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
+        $this->event = $event;
     }
 
     /**
@@ -145,14 +163,23 @@ class User implements \JsonSerializable
         $this->surname = $surname;
     }
 
+    /**
+     * @return Collection
+     */
+    public function getEvent(): Collection
+    {
+        return $this->event;
+    }
 
     /**
-     * Specify data which should be serialized to JSON
-     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since 5.4.0
+     * @param Collection $event
      */
+    public function setEvent(Collection $event): void
+    {
+        $this->event = $event;
+    }
+
+
     public function jsonSerialize()
     {
         return array(
@@ -160,7 +187,8 @@ class User implements \JsonSerializable
             'username'  => $this->username,
             'password'  => $this->password,
             'name'      => $this->name,
-            'surname'   => $this->surname
+            'surname'   => $this->surname,
+            'events'    => $this->event
         );
     }
 }
