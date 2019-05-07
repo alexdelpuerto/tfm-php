@@ -37,12 +37,9 @@ class Event implements \JsonSerializable
     private $budget;
 
     /**
-     * @var \User
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="creator", referencedColumnName="id")
-     * })
+     *   @ORM\Column(name="creator", type="string", length=20, nullable=false)
      */
     private $creator;
 
@@ -57,10 +54,10 @@ class Event implements \JsonSerializable
      * Event constructor.
      * @param string $name
      * @param float $budget
-     * @param \User $creator
+     * @param string $creator
      * @param Collection $user
      */
-    public function __construct(string $name, float $budget, \User $creator, Collection $user)
+    public function __construct(string $name, float $budget, string $creator, Collection $user)
     {
         $this->id = 0;
         $this->name = $name;
@@ -120,15 +117,15 @@ class Event implements \JsonSerializable
     /**
      * @return \User
      */
-    public function getCreator(): \User
+    public function getCreator(): string
     {
         return $this->creator;
     }
 
     /**
-     * @param \User $creator
+     * @param string $creator
      */
-    public function setCreator(\User $creator): void
+    public function setCreator(string $creator): void
     {
         $this->creator = $creator;
     }
