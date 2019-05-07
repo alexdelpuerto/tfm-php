@@ -71,9 +71,9 @@ class User implements \JsonSerializable
      * @param string $password
      * @param string|null $name
      * @param string|null $surname
-     * @param Collection $event
+     * @param Collection|null $event
      */
-    public function __construct(string $username, string $password, ?string $name, ?string $surname, Collection $event)
+    public function __construct(string $username, string $password, ?string $name, ?string $surname, ?Collection $event)
     {
         $this->id = 0;
         $this->username = $username;

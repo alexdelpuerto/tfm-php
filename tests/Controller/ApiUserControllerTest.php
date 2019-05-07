@@ -80,7 +80,8 @@ class ApiUserControllerTest extends WebTestCase
             'username'=> 'user',
             'password'=>'user',
             'name'=>'user',
-            'surname'=>'u'
+            'surname'=>'u',
+            'event'=>null
         ];
 
         self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
@@ -97,7 +98,8 @@ class ApiUserControllerTest extends WebTestCase
             'username'=> 'user',
             'password'=>'user',
             'name'=>'user',
-            'surname'=>'u'
+            'surname'=>'u',
+            'event'=> null
         ];
 
         self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,

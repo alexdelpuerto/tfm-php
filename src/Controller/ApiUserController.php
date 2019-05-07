@@ -30,11 +30,13 @@ class ApiUserController extends AbstractController {
         $data = json_decode($dataRequest, true);
 
         $em = $this->getDoctrine()->getManager();
-        $userId = $em->getRepository(User::class)->findOneBy(array('username' => $data['username'], 'password' => $data['password']));
+        $user = $em->getRepository(User::class)->findOneBy(array('username' => $data['username'], 'password' => $data['password']));
 
-        return ($userId === null)
+        return ($user === null)
             ? $this->error404()
-            : new JsonResponse(Response::HTTP_OK);
+            : new JsonResponse(
+                ['userId'=>$user->getId()],
+                Response::HTTP_OK);
     }
 
     /**
@@ -50,7 +52,8 @@ class ApiUserController extends AbstractController {
             $data['username'],
             $data['password'],
             $data['name'],
-            $data['surname']
+            $data['surname'],
+            $data['event']
         );
 
         $em = $this->getDoctrine()->getManager();
