@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,15 +56,19 @@ class Event implements \JsonSerializable
      * @param string $name
      * @param float $budget
      * @param string $creator
-     * @param Collection $user
      */
-    public function __construct(string $name, float $budget, string $creator, Collection $user)
+    public function __construct(string $name, float $budget, string $creator)
     {
         $this->id = 0;
         $this->name = $name;
         $this->budget = $budget;
         $this->creator = $creator;
-        $this->user = $user;
+        $this->user = new ArrayCollection();
+    }
+
+    public function addUser(User $user){
+        $this->user[]=$user;
+        return $this;
     }
 
     /**
