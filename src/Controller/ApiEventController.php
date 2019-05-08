@@ -3,9 +3,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\User;
+use Doctrine\Common\Collections\Collection;
+use function Sodium\add;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -34,11 +38,53 @@ class ApiEventController extends AbstractController {
                 Response::HTTP_OK);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route(path="", name="post", methods={"POST"})
+     */
+    public function postEvents(Request $request):Response{
+        $dataRequest = $request->getContent();
+        $data = json_decode($dataRequest, true);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(array('username' => $data['creator']));
+
+        if($user===null){
+            return $this->error400();
+        }else {
+            $event = new Event(
+                $data['name'],
+                $data['budget'],
+                $data['creator']
+            );
+            $event->addUser($user);
+            $user->addEvent($event);
+
+            $em->persist($event);
+            $em->persist($user);
+            $em->flush();
+
+            return new JsonResponse(
+                ['event' => $event],
+                Response::HTTP_CREATED
+            );
+        }
+    }
+
     private function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
             'message' => "No hay eventos para el usuario buscado"
         ];
         return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+    }
+
+    private function error400(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_BAD_REQUEST,
+            'message' => "Bad Request"
+        ];
+        return new JsonResponse($message, Response::HTTP_BAD_REQUEST);
     }
 }
