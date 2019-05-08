@@ -54,4 +54,38 @@ class ApiEventControllerTest extends WebTestCase{
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
     }
 
+    /**
+     * Implements testPostEvents
+     * @return int
+     * @covers ::postEvents
+     */
+    public function testPostEvents():int{
+        $data = [
+            'name'=>'Event prueba',
+            'budget'=>13.2,
+            'creator'=>'user1'
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiEventController::EVENT_API_PATH,
+            [], [], [], json_encode($data));
+        self::assertEquals(Response::HTTP_CREATED, self::$client->getResponse()->getStatusCode());
+
+        $body = self::$client->getResponse()->getContent();
+        $dataDecoder = json_decode($body, true);
+        return $dataDecoder['event']['id'];
+    }
+
+    public function testPostEventsError(): void{
+        $data = [
+            'name'=>'Event prueba123',
+            'budget'=>13.2,
+            'creator'=>'user123'
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiEventController::EVENT_API_PATH,
+            [], [], [], json_encode($data));
+        self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
+
+    }
+
 }
