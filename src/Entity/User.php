@@ -184,7 +184,6 @@ class User implements \JsonSerializable
         $this->event = $event;
     }
 
-
     public function jsonSerialize()
     {
         return array(

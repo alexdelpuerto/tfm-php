@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Tests\Controller;
-
 
 use App\Controller\ApiEventController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -75,6 +73,10 @@ class ApiEventControllerTest extends WebTestCase{
         return $dataDecoder['event']['id'];
     }
 
+    /**
+     * Implements testPostEventsError
+     * @covers ::postEvents
+     */
     public function testPostEventsError(): void{
         $data = [
             'name'=>'Event prueba123',
@@ -85,7 +87,5 @@ class ApiEventControllerTest extends WebTestCase{
         self::$client->request(Request::METHOD_POST, ApiEventController::EVENT_API_PATH,
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
-
     }
-
 }

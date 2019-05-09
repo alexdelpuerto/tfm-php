@@ -1,12 +1,9 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\User;
-use Doctrine\Common\Collections\Collection;
-use function Sodium\add;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
