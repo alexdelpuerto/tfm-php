@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller;
 
 use App\Controller\ApiUserController;
@@ -13,8 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
  * @package App\Tests\Controller
  * @coversDefaultClass \App\Controller\ApiUserController
  */
-class ApiUserControllerTest extends WebTestCase
-{
+class ApiUserControllerTest extends WebTestCase{
+
     /**@var Client $client*/
     private static $client;
 
@@ -93,6 +92,10 @@ class ApiUserControllerTest extends WebTestCase
         return $dataDecoder['user']['id'];
     }
 
+    /**
+     * Implements testRegisterError
+     * @covers ::register
+     */
     public function testRegisterError(): void{
         $data = [
             'username'=> 'user',
