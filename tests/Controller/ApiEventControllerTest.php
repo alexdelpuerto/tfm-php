@@ -19,7 +19,7 @@ class ApiEventControllerTest extends WebTestCase{
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
         self::$userId = 9;
-        self::$userIdError = 8;
+        self::$userIdError = 2;
     }
 
     /**
@@ -49,7 +49,7 @@ class ApiEventControllerTest extends WebTestCase{
         $message = json_decode($body, true);
         self::assertArrayHasKey('code', $message);
         self::assertArrayHasKey('message', $message);
-        self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
     }
 
     /**
