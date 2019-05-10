@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,8 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="event", indexes={@ORM\Index(name="creator", columns={"creator"})})
  * @ORM\Entity
  */
-class Event implements \JsonSerializable
-{
+class Event implements \JsonSerializable {
     /**
      * @var int
      *
@@ -52,6 +50,12 @@ class Event implements \JsonSerializable
     private $user;
 
     /**
+     * @var Collection $gift
+     * @ORM\OneToMany(targetEntity="Gift", mappedBy="event")
+     */
+    protected $gift;
+
+    /**
      * Event constructor.
      * @param string $name
      * @param float $budget
@@ -64,10 +68,16 @@ class Event implements \JsonSerializable
         $this->budget = $budget;
         $this->creator = $creator;
         $this->user = new ArrayCollection();
+        $this->gift = new ArrayCollection();
     }
 
     public function addUser(User $user){
         $this->user[]=$user;
+        return $this;
+    }
+
+    public function addGift(Gift $gift){
+        $this->gift[]=$gift;
         return $this;
     }
 
@@ -120,7 +130,7 @@ class Event implements \JsonSerializable
     }
 
     /**
-     * @return \User
+     * @return string
      */
     public function getCreator(): string
     {
@@ -151,6 +161,24 @@ class Event implements \JsonSerializable
         $this->user = $user;
     }
 
+    /**
+     * @return Collection
+     */
+    public function getGifts(): Collection
+    {
+        return $this->gift;
+    }
+
+    /**
+     * @param Collection $gifts
+     */
+    public function setGifts(Collection $gifts): void
+    {
+        $this->gift = $gifts;
+    }
+
+
+
     public function jsonSerialize()
     {
         return array(
@@ -158,7 +186,8 @@ class Event implements \JsonSerializable
             'name'      => $this->name,
             'budget'    => $this->budget,
             'creator'   => $this->creator,
-            'users'     => $this->user
+            'users'     => $this->user,
+            'gifts'     => $this->gift
         );
     }
 }
