@@ -52,4 +52,43 @@ class ApiGiftControllerTest extends WebTestCase {
         self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
     }
 
+    /**
+     * Implements testPostGifts
+     * @return int
+     * @covers ::postGifts
+     */
+    public function testPostGifts():int{
+        $data = [
+            'name'=>'Regalo prueba',
+            'price'=>13.2,
+            'description'=>'Descripcion',
+            'eventId'=>2
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiGiftController::GIFT_API_PATH,
+            [], [], [], json_encode($data));
+        self::assertEquals(Response::HTTP_CREATED, self::$client->getResponse()->getStatusCode());
+
+        $body = self::$client->getResponse()->getContent();
+        $dataDecoder = json_decode($body, true);
+        return $dataDecoder['gift']['id'];
+    }
+
+    /**
+     * Implements testPostGiftsError
+     * @covers ::postGifts
+     */
+    public function testPostGiftsError(): void{
+        $data = [
+            'name'=>'Regalo prueba123',
+            'price'=>13.2,
+            'description'=>null,
+            'eventId'=>null
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiGiftController::GIFT_API_PATH,
+            [], [], [], json_encode($data));
+        self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
+    }
+
 }
