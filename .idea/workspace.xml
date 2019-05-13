@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d46dc1ef-7126-4b50-b45e-f56986ad8631" name="Default Changelist" comment="Controlador get Gifts issue #9">
+    <list default="true" id="d46dc1ef-7126-4b50-b45e-f56986ad8631" name="Default Changelist" comment="Controlador post Gifts issue #10">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ApiGiftController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiGiftController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +33,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/ApiUserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
+            <state relative-caret-position="-861">
               <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
               <folding>
                 <element signature="e#34#54#0#PHP" expanded="true" />
@@ -42,23 +42,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/ApiGiftController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
+            <state relative-caret-position="441">
+              <caret line="55" column="37" lean-forward="true" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
               <folding>
-                <element signature="e#35#56#0#PHP" expanded="true" />
+                <element signature="e#34#55#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/ApiEventController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
+              <folding>
+                <element signature="e#34#55#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="51" column="67" selection-start-line="51" selection-start-column="67" selection-end-line="51" selection-end-column="67" />
+            <state relative-caret-position="245">
+              <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
               <folding>
                 <element signature="e#40#77#0#PHP" expanded="true" />
               </folding>
@@ -69,7 +81,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
+            <state relative-caret-position="1008">
               <caret line="51" column="67" selection-start-line="51" selection-start-column="67" selection-end-line="51" selection-end-column="67" />
               <folding>
                 <element signature="e#40#78#0#PHP" expanded="true" />
@@ -79,21 +91,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/ApiEventController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1428">
-              <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
-              <folding>
-                <element signature="e#34#55#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1907">
+            <state relative-caret-position="1197">
               <caret line="58" column="12" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="12" />
               <folding>
                 <element signature="e#30#73#0#PHP" expanded="true" />
@@ -105,7 +105,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Gift.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
+            <state relative-caret-position="-570">
               <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
             </state>
           </provider>
@@ -114,7 +114,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1932">
+            <state relative-caret-position="-2499">
               <caret line="58" column="22" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
               <folding>
                 <element signature="e#30#78#0#PHP" expanded="true" />
@@ -126,7 +126,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1019">
+            <state relative-caret-position="1953">
               <caret line="96" column="25" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
             </state>
           </provider>
@@ -164,9 +164,9 @@
         <option value="$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php" />
         <option value="$PROJECT_DIR$/src/Entity/Event.php" />
         <option value="$PROJECT_DIR$/src/Entity/Gift.php" />
-        <option value="$PROJECT_DIR$/src/Controller/ApiGiftController.php" />
         <option value="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" />
         <option value="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" />
+        <option value="$PROJECT_DIR$/src/Controller/ApiGiftController.php" />
       </list>
     </option>
   </component>
@@ -329,37 +329,6 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.ApiGiftControllerTest.testGetGiftsError">
-    <configuration name="ApiEventControllerTest.testGetEventsError" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Controller\ApiEventControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" method="testGetEventsError" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ApiEventControllerTest.testPostEvents" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Controller\ApiEventControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" method="testPostEvents" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ApiEventControllerTest.testPostEventsError" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Controller\ApiEventControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" method="testPostEventsError" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ApiGiftControllerTest.testGetGifts" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Controller\ApiGiftControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" method="testGetGifts" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ApiGiftControllerTest.testGetGiftsError" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Controller\ApiGiftControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" method="testGetGiftsError" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="PHPUnit.ApiGiftControllerTest.testGetGiftsError" />
-        <item itemvalue="PHPUnit.ApiEventControllerTest.testGetEventsError" />
-        <item itemvalue="PHPUnit.ApiGiftControllerTest.testGetGifts" />
-        <item itemvalue="PHPUnit.ApiEventControllerTest.testPostEventsError" />
-        <item itemvalue="PHPUnit.ApiEventControllerTest.testPostEvents" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -382,7 +351,8 @@
       <workItem from="1557232312857" duration="7344000" />
       <workItem from="1557304280483" duration="4169000" />
       <workItem from="1557394916890" duration="538000" />
-      <workItem from="1557472189786" duration="8512000" />
+      <workItem from="1557472189786" duration="8721000" />
+      <workItem from="1557733695050" duration="3940000" />
     </task>
     <task id="LOCAL-00001" summary="Definida tabla Users issue #1">
       <created>1556099363855</created>
@@ -531,7 +501,21 @@
       <option name="project" value="LOCAL" />
       <updated>1557479853270</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Tests Controlador get Gifts issue #9">
+      <created>1557480830803</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1557480830803</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Tests Controlador get Gifts issue #9">
+      <created>1557480850626</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1557480850626</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -567,18 +551,18 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81068000" />
+    <option name="totallyTimeSpent" value="85217000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13965885" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.141258" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32502708" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32502708" />
       <window_info anchor="bottom" id="Debug" order="3" show_stripe_button="false" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -586,10 +570,10 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="REST Client" order="9" show_stripe_button="false" weight="0.42997813" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.34777898" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.33694476" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.33152762" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32502708" />
+      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.32502708" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -656,7 +640,9 @@
     <MESSAGE value="Refactorizar issue #8" />
     <MESSAGE value="Deiseñar estructura de los datos issue #9" />
     <MESSAGE value="Controlador get Gifts issue #9" />
-    <option name="LAST_COMMIT_MESSAGE" value="Controlador get Gifts issue #9" />
+    <MESSAGE value="Tests Controlador get Gifts issue #9" />
+    <MESSAGE value="Controlador post Gifts issue #10" />
+    <option name="LAST_COMMIT_MESSAGE" value="Controlador post Gifts issue #10" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Entity/Users.php" />
@@ -728,16 +714,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Gift.php">
+    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        <state relative-caret-position="1008">
+          <caret line="51" column="67" selection-start-line="51" selection-start-column="67" selection-end-line="51" selection-end-column="67" />
+          <folding>
+            <element signature="e#40#78#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="58" column="12" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="12" />
+          <folding>
+            <element signature="e#30#73#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1953">
+          <caret line="96" column="25" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          <folding>
+            <element signature="e#40#77#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ApiUserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
+        <state relative-caret-position="-861">
           <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
           <folding>
             <element signature="e#34#54#0#PHP" expanded="true" />
@@ -747,7 +763,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1932">
+        <state relative-caret-position="-2499">
           <caret line="58" column="22" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
           <folding>
             <element signature="e#30#78#0#PHP" expanded="true" />
@@ -755,20 +771,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Gift.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1907">
-          <caret line="58" column="12" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="12" />
-          <folding>
-            <element signature="e#30#73#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="-570">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ApiEventController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
+        <state relative-caret-position="144">
+          <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
           <folding>
             <element signature="e#34#55#0#PHP" expanded="true" />
           </folding>
@@ -777,37 +790,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ApiGiftController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
+        <state relative-caret-position="441">
+          <caret line="55" column="37" lean-forward="true" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
           <folding>
-            <element signature="e#35#56#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1019">
-          <caret line="96" column="25" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="51" column="67" selection-start-line="51" selection-start-column="67" selection-end-line="51" selection-end-column="67" />
-          <folding>
-            <element signature="e#40#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="51" column="67" selection-start-line="51" selection-start-column="67" selection-end-line="51" selection-end-column="67" />
-          <folding>
-            <element signature="e#40#77#0#PHP" expanded="true" />
+            <element signature="e#34#55#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
