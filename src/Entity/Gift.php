@@ -41,6 +41,13 @@ class Gift implements \JsonSerializable {
     private $price;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="bought", type="boolean", options={"default" = false})
+     */
+    private $bought;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="gift")
      */
@@ -51,14 +58,16 @@ class Gift implements \JsonSerializable {
      * @param string $name
      * @param string|null $description
      * @param float $price
+     * @param bool $bought
      * @param Event $event
      */
-    public function __construct(string $name, ?string $description, float $price, Event $event)
+    public function __construct(string $name, ?string $description, float $price, bool $bought, Event $event)
     {
         $this->id = 0;
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
+        $this->bought = $bought;
         $this->event = $event;
     }
 
@@ -127,6 +136,22 @@ class Gift implements \JsonSerializable {
     }
 
     /**
+     * @return bool
+     */
+    public function isBought(): bool
+    {
+        return $this->bought;
+    }
+
+    /**
+     * @param bool $bought
+     */
+    public function setBought(bool $bought): void
+    {
+        $this->bought = $bought;
+    }
+
+    /**
      * @return Event
      */
     public function getEvent(): Event
@@ -149,6 +174,7 @@ class Gift implements \JsonSerializable {
             'name'          => $this->name,
             'description'   => $this->description,
             'price'         => $this->price,
+            'bought'        => $this->bought,
             'event'         => $this->event
         );
     }
