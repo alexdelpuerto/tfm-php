@@ -14,12 +14,14 @@ class ApiGiftControllerTest extends WebTestCase {
 
     public static $eventId;
     public static $eventIdError;
+    public static $giftId;
 
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
         self::$eventId = 2;
         self::$eventIdError = 3;
+        self::$giftId = 6;
     }
 
     /**
@@ -89,6 +91,20 @@ class ApiGiftControllerTest extends WebTestCase {
         self::$client->request(Request::METHOD_POST, ApiGiftController::GIFT_API_PATH,
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testBuyGifts
+     * @covers ::buyGifts
+     */
+    public function testBuyGifts(): void {
+        self::$client->request(Request::METHOD_PATCH, ApiGiftController::GIFT_API_PATH . '/' . self::$giftId);
+        self::assertEquals(209, self::$client->getResponse()->getStatusCode());
+
+        $body = self::$client->getResponse()->getContent();
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('gift', $data);
+        self::assertEquals(true, $data['gift']['bought']);
     }
 
 }

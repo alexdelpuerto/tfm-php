@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d46dc1ef-7126-4b50-b45e-f56986ad8631" name="Default Changelist" comment="Definir la estructura de datos payments issue #11">
+    <list default="true" id="d46dc1ef-7126-4b50-b45e-f56986ad8631" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ApiGiftController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiGiftController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +33,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/ApiGiftController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
+            <state relative-caret-position="-105">
               <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
               <folding>
                 <element signature="e#34#55#0#PHP" expanded="true" />
@@ -43,9 +43,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/Controller/ApiPaymentControllerTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-94">
+              <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/ApiPaymentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="252">
               <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
               <folding>
                 <element signature="e#34#54#0#PHP" expanded="true" />
@@ -61,30 +79,6 @@
               <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
               <folding>
                 <element signature="e#34#55#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-565">
-              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-              <folding>
-                <element signature="e#40#77#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1596">
-              <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
-              <folding>
-                <element signature="e#40#78#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,7 +105,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Payment.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="329">
@@ -173,11 +167,12 @@
         <option value="$PROJECT_DIR$/tests/Controller/ApiUserControllerTest.php" />
         <option value="$PROJECT_DIR$/src/Entity/Event.php" />
         <option value="$PROJECT_DIR$/tests/Controller/ApiEventControllerTest.php" />
-        <option value="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" />
         <option value="$PROJECT_DIR$/src/Entity/Gift.php" />
         <option value="$PROJECT_DIR$/src/Controller/ApiGiftController.php" />
         <option value="$PROJECT_DIR$/src/Controller/ApiPaymentController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Payment.php" />
+        <option value="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" />
+        <option value="$PROJECT_DIR$/tests/Controller/ApiPaymentControllerTest.php" />
       </list>
     </option>
   </component>
@@ -340,7 +335,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.ApiGiftControllerTest.testPostGiftsError">
+  <component name="RunManager" selected="PHPUnit.ApiPaymentControllerTest.testPostPayments">
+    <configuration name="ApiGiftControllerTest.testBuyGifts" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Controller\ApiGiftControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" method="testBuyGifts" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="ApiGiftControllerTest.testPostGifts" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="App\Tests\Controller\ApiGiftControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" method="testPostGifts" scope="Method" />
       <method v="2" />
@@ -349,8 +348,14 @@
       <TestRunner class="App\Tests\Controller\ApiGiftControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php" method="testPostGiftsError" scope="Method" />
       <method v="2" />
     </configuration>
+    <configuration name="ApiPaymentControllerTest.testPostPayments" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Controller\ApiPaymentControllerTest" file="$PROJECT_DIR$/tests/Controller/ApiPaymentControllerTest.php" method="testPostPayments" scope="Method" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.ApiPaymentControllerTest.testPostPayments" />
+        <item itemvalue="PHPUnit.ApiGiftControllerTest.testBuyGifts" />
         <item itemvalue="PHPUnit.ApiGiftControllerTest.testPostGiftsError" />
         <item itemvalue="PHPUnit.ApiGiftControllerTest.testPostGifts" />
       </list>
@@ -381,7 +386,7 @@
       <workItem from="1557472189786" duration="8721000" />
       <workItem from="1557733695050" duration="5238000" />
       <workItem from="1557823976559" duration="2628000" />
-      <workItem from="1557997606393" duration="7940000" />
+      <workItem from="1557997606393" duration="9302000" />
     </task>
     <task id="LOCAL-00001" summary="Definida tabla Users issue #1">
       <created>1556099363855</created>
@@ -572,25 +577,17 @@
       <option name="project" value="LOCAL" />
       <updated>1558000064951</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Controlador de comprar regalos issue #11">
+      <created>1558008311223</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1558008311223</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ApiGiftControllerTest_testGetGiftsError - 2019.05.10 at 11h 29m 27s.xml">
-      <configuration name="ApiGiftControllerTest.testGetGiftsError" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="ApiGiftControllerTest_testGetGifts - 2019.05.10 at 11h 29m 52s.xml">
-      <configuration name="ApiGiftControllerTest.testGetGifts" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="ApiGiftControllerTest_testGetGiftsError - 2019.05.10 at 11h 29m 54s.xml">
-      <configuration name="ApiGiftControllerTest.testGetGiftsError" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="ApiEventControllerTest_testGetEventsError - 2019.05.10 at 11h 32m 03s.xml">
-      <configuration name="ApiEventControllerTest.testGetEventsError" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="ApiGiftControllerTest_testGetGiftsError - 2019.05.10 at 11h 32m 17s.xml">
-      <configuration name="ApiGiftControllerTest.testGetGiftsError" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="ApiGiftControllerTest_testPostGifts - 2019.05.13 at 14h 36m 44s.xml">
       <configuration name="ApiGiftControllerTest.testPostGifts" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -606,19 +603,35 @@
     <history-entry file="ApiGiftControllerTest_testPostGiftsError - 2019.05.13 at 14h 37m 39s.xml">
       <configuration name="ApiGiftControllerTest.testPostGiftsError" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="ApiGiftControllerTest_testBuyGifts - 2019.05.16 at 14h 16m 01s.xml">
+      <configuration name="ApiGiftControllerTest.testBuyGifts" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApiGiftControllerTest_testBuyGifts - 2019.05.16 at 14h 18m 35s.xml">
+      <configuration name="ApiGiftControllerTest.testBuyGifts" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApiPaymentControllerTest_testPostPayments - 2019.05.16 at 14h 25m 43s.xml">
+      <configuration name="ApiPaymentControllerTest.testPostPayments" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApiPaymentControllerTest_testPostPayments - 2019.05.16 at 14h 26m 28s.xml">
+      <configuration name="ApiPaymentControllerTest.testPostPayments" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApiPaymentControllerTest_testPostPayments - 2019.05.16 at 14h 26m 55s.xml">
+      <configuration name="ApiPaymentControllerTest.testPostPayments" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97083000" />
+    <option name="totallyTimeSpent" value="98445000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1444563" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32502708" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3217768" />
       <window_info anchor="bottom" id="Debug" order="3" show_stripe_button="false" weight="0.39934355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -626,7 +639,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="REST Client" order="9" show_stripe_button="false" weight="0.42997813" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.27302274" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.27571115" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.58504874" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32502708" />
@@ -700,7 +713,8 @@
     <MESSAGE value="Controlador post Gifts issue #10" />
     <MESSAGE value="Tests Controlador post Gifts issue #10" />
     <MESSAGE value="Definir la estructura de datos payments issue #11" />
-    <option name="LAST_COMMIT_MESSAGE" value="Definir la estructura de datos payments issue #11" />
+    <MESSAGE value="Controlador de comprar regalos issue #11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Controlador de comprar regalos issue #11" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Entity/Users.php" />
@@ -809,42 +823,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-565">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding>
-            <element signature="e#40#77#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/ApiGiftController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
-          <folding>
-            <element signature="e#34#55#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ApiEventController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
           <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
           <folding>
             <element signature="e#34#55#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/ApiPaymentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
-          <folding>
-            <element signature="e#34#54#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -870,6 +854,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
           <caret line="35" column="68" selection-start-line="35" selection-start-column="68" selection-end-line="35" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ApiGiftController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
+          <folding>
+            <element signature="e#34#55#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ApiPaymentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+          <folding>
+            <element signature="e#34#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiGiftControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Controller/ApiPaymentControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-94">
+          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
         </state>
       </provider>
     </entry>

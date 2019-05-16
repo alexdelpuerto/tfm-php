@@ -49,7 +49,7 @@ class ApiPaymentController extends AbstractController{
                 $em->flush();
             }
         }
-        return new JsonResponse(Response::HTTP_CREATED);
+        return new JsonResponse([],Response::HTTP_CREATED);
     }
 
 }
