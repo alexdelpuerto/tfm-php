@@ -68,6 +68,29 @@ class ApiGiftController extends AbstractController {
         }
     }
 
+    /**
+     * @param $giftId
+     * @return Response
+     * @Route(path="/{giftId}", name="buy", methods={"PATCH"})
+     */
+    public function buyGifts($giftId): Response{
+        $em = $this->getDoctrine()->getManager();
+        $gift = $em->getRepository(Gift::class)->find($giftId);
+
+        if($gift===null){
+            return null;
+        } else{
+            $gift->setBought(true);
+            $em->persist($gift);
+            $em->flush();
+
+            return new JsonResponse(
+                ['gift'=>$gift],
+                209
+            );
+        }
+    }
+
     private function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
