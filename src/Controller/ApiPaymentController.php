@@ -46,9 +46,13 @@ class ApiPaymentController extends AbstractController{
                 );
 
                 $em->persist($payment);
-                $em->flush();
             }
         }
+
+        $gift->setBought(true);
+        $em->persist($gift);
+        $em->flush();
+
         return new JsonResponse([],Response::HTTP_CREATED);
     }
 
