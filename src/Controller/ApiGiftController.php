@@ -86,7 +86,7 @@ class ApiGiftController extends AbstractController {
 
             return new JsonResponse(
                 ['gift'=>$gift],
-                209
+                Response::HTTP_OK
             );
         }
     }
