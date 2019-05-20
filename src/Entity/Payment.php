@@ -10,14 +10,20 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="payment", indexes={@ORM\Index(name="buyer", columns={"buyer", "person"})})
  * @ORM\Entity
  */
-class Payment implements \JsonSerializable
-{
+class Payment implements \JsonSerializable {
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
     /**
      * @var string
      *
      * @ORM\Column(name="buyer", type="string", length=20, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $buyer;
 
@@ -25,8 +31,6 @@ class Payment implements \JsonSerializable
      * @var string
      *
      * @ORM\Column(name="person", type="string", length=20, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $person;
 
@@ -45,9 +49,26 @@ class Payment implements \JsonSerializable
      */
     public function __construct(string $buyer, string $person, float $price)
     {
+        $this->id = 0;
         $this->buyer = $buyer;
         $this->person = $person;
         $this->price = $price;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
