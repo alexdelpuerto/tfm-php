@@ -56,4 +56,29 @@ class ApiPaymentController extends AbstractController{
         return new JsonResponse([],Response::HTTP_CREATED);
     }
 
+    /**
+     * @param $username
+     * @return Response
+     * @Route(path="/{username}", name="getCollections", methods={"GET"})
+     */
+    public function getCollections($username): Response {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT p.person, SUM(p.price) as totalPrice FROM App\Entity\Payment p WHERE p.buyer = ?1 GROUP BY p.person');
+        $query->setParameter(1, $username);
+
+        $results = $query->getResult();
+        return (empty($results))
+            ? $this->error404()
+            : new JsonResponse(
+                ['collections'=>$query->getResult()], Response::HTTP_OK);
+    }
+
+    private function error404(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_NOT_FOUND,
+            'message' => "El usuario no tiene cobros pendientes"
+        ];
+        return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+    }
+
 }
