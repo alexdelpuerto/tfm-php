@@ -92,19 +92,4 @@ class ApiGiftControllerTest extends WebTestCase {
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
     }
-
-    /**
-     * Implements testBuyGifts
-     * @covers ::buyGifts
-     */
-    public function testBuyGifts(): void {
-        self::$client->request(Request::METHOD_PATCH, ApiGiftController::GIFT_API_PATH . '/' . self::$giftId);
-        self::assertEquals(209, self::$client->getResponse()->getStatusCode());
-
-        $body = self::$client->getResponse()->getContent();
-        $data = json_decode($body, true);
-        self::assertArrayHasKey('gift', $data);
-        self::assertEquals(true, $data['gift']['bought']);
-    }
-
 }
