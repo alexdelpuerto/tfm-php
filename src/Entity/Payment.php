@@ -42,17 +42,26 @@ class Payment implements \JsonSerializable {
     private $price;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="giftName", type="string", length=20, nullable=false)
+     */
+    private $giftname;
+
+    /**
      * Payment constructor.
      * @param string $buyer
      * @param string $person
      * @param float $price
+     * @param string $giftname
      */
-    public function __construct(string $buyer, string $person, float $price)
+    public function __construct(string $buyer, string $person, float $price, string $giftname)
     {
         $this->id = 0;
         $this->buyer = $buyer;
         $this->person = $person;
         $this->price = $price;
+        $this->giftname = $giftname;
     }
 
     /**
@@ -119,12 +128,30 @@ class Payment implements \JsonSerializable {
         $this->price = $price;
     }
 
+    /**
+     * @return string
+     */
+    public function getGiftname(): string
+    {
+        return $this->giftname;
+    }
+
+    /**
+     * @param string $giftname
+     */
+    public function setGiftname(string $giftname): void
+    {
+        $this->giftname = $giftname;
+    }
+
     public function jsonSerialize()
     {
         return array(
+            'id'            => $this->id,
             'buyer'         => $this->buyer,
             'person'        => $this->person,
-            'price'         => $this->price
+            'price'         => $this->price,
+            'giftname'      => $this->giftname
         );
     }
 }
