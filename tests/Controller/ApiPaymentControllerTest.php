@@ -43,7 +43,7 @@ class ApiPaymentControllerTest extends WebTestCase{
      * @covers ::getCollections
      */
     public function testGetCollections(): void {
-        self::$client->request(Request::METHOD_GET, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$username);
+        self::$client->request(Request::METHOD_GET, ApiPaymentController::PAYMENT_API_PATH . 'Col/' . self::$username);
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
 
@@ -57,6 +57,36 @@ class ApiPaymentControllerTest extends WebTestCase{
      * @covers ::getCollections
      */
     public function testGetCollectionsError(): void {
+        self::$client->request(Request::METHOD_GET, ApiPaymentController::PAYMENT_API_PATH . 'Col/' . self::$usernameError);
+        self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $message = json_decode($body, true);
+        self::assertArrayHasKey('code', $message);
+        self::assertArrayHasKey('message', $message);
+        self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
+    }
+
+    /**
+     * Implements testGetPayments
+     * @covers ::getPayments
+     */
+    public function testGetPayments(): void {
+        self::$client->request(Request::METHOD_GET, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$username);
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('payments', $data);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testGetPaymentsError
+     * @covers ::getPayments
+     */
+    public function testGetPaymentsError(): void {
         self::$client->request(Request::METHOD_GET, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$usernameError);
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
         $body = self::$client->getResponse()->getContent();
