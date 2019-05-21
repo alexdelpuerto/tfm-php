@@ -60,16 +60,31 @@ class ApiPaymentController extends AbstractController{
     /**
      * @param $username
      * @return Response
-     * @Route(path="/{username}", name="getCollections", methods={"GET"})
+     * @Route(path="Col/{username}", name="getCollections", methods={"GET"})
      */
     public function getCollections($username): Response {
         $em = $this->getDoctrine()->getManager();
-        $payment = $em->getRepository(Payment::class)->findBy(array('buyer' => $username));
+        $collection = $em->getRepository(Payment::class)->findBy(array('buyer' => $username));
+
+        return (empty($collection))
+            ? $this->error404()
+            : new JsonResponse(
+                ['collections'=>$collection], Response::HTTP_OK);
+    }
+
+    /**
+     * @param $username
+     * @return Response
+     * @Route(path="/{username}", name="getPayments", methods={"GET"})
+     */
+    public function getPayments($username): Response {
+        $em = $this->getDoctrine()->getManager();
+        $payment = $em->getRepository(Payment::class)->findBy(array('person' => $username));
 
         return (empty($payment))
             ? $this->error404()
             : new JsonResponse(
-                ['collections'=>$payment], Response::HTTP_OK);
+                ['payments'=>$payment], Response::HTTP_OK);
     }
 
     private function error404(): JsonResponse{
