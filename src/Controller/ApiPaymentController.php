@@ -42,7 +42,8 @@ class ApiPaymentController extends AbstractController{
                 $payment = new Payment(
                     $data['buyer'],
                     $event->getUser()[$i]->getUsername(),
-                    $price/$numUsers
+                    $price/$numUsers,
+                    $gift->getName()
                 );
 
                 $em->persist($payment);
@@ -63,14 +64,12 @@ class ApiPaymentController extends AbstractController{
      */
     public function getCollections($username): Response {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT p.person, SUM(p.price) as totalPrice FROM App\Entity\Payment p WHERE p.buyer = ?1 GROUP BY p.person');
-        $query->setParameter(1, $username);
+        $payment = $em->getRepository(Payment::class)->findBy(array('buyer' => $username));
 
-        $results = $query->getResult();
-        return (empty($results))
+        return (empty($payment))
             ? $this->error404()
             : new JsonResponse(
-                ['collections'=>$query->getResult()], Response::HTTP_OK);
+                ['collections'=>$payment], Response::HTTP_OK);
     }
 
     private function error404(): JsonResponse{
