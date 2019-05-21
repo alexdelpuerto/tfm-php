@@ -82,7 +82,7 @@ class ApiPaymentController extends AbstractController{
         $payment = $em->getRepository(Payment::class)->findBy(array('person' => $username));
 
         return (empty($payment))
-            ? $this->error404()
+            ? $this->error404p()
             : new JsonResponse(
                 ['payments'=>$payment], Response::HTTP_OK);
     }
@@ -91,6 +91,14 @@ class ApiPaymentController extends AbstractController{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
             'message' => "El usuario no tiene cobros pendientes"
+        ];
+        return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+    }
+
+    private function error404p(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_NOT_FOUND,
+            'message' => "El usuario no tiene pagos pendientes"
         ];
         return new JsonResponse($message, Response::HTTP_NOT_FOUND);
     }
