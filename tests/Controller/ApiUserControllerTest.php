@@ -17,8 +17,14 @@ class ApiUserControllerTest extends WebTestCase{
     /**@var Client $client*/
     private static $client;
 
+    public static $searchUser;
+    public static $searchUserError;
+
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
+
+        self::$searchUser = 'n';
+        self::$searchUserError = '55';
     }
 
     /**
@@ -108,5 +114,31 @@ class ApiUserControllerTest extends WebTestCase{
         self::$client->request(Request::METHOD_POST, ApiUserController::USER_API_PATH,
             [],[],[],json_encode($data));
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testSearchUsers
+     * @covers ::searchUsers
+     */
+    public function testSearchUsers(): void {
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$searchUser);
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('users', $data);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    public function testSearchUsersError(): void{
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$searchUserError);
+        self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $message = json_decode($body, true);
+        self::assertArrayHasKey('code', $message);
+        self::assertArrayHasKey('message', $message);
+        self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
     }
 }
