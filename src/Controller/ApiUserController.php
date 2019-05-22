@@ -72,6 +72,23 @@ class ApiUserController extends AbstractController {
         }
     }
 
+    /**
+     * @param $username
+     * @return Response
+     * @Route(path="/{username}", name="get", methods={"GET"})
+     */
+    public function searchUsers($username): Response{
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT u.id, u.username, u.name, u.surname FROM App\Entity\User u WHERE u.username LIKE :search');
+        $query->setParameter('search', '%'.$username.'%');
+
+        $users = $query->getResult();
+        return (empty($users))
+            ? $this->error404s()
+            : new JsonResponse(
+                ['users'=>$query->getResult()], Response::HTTP_OK);
+    }
+
     public function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
@@ -86,5 +103,13 @@ class ApiUserController extends AbstractController {
             'message' => 'El nombre de usuario ya existe'
         ];
         return new JsonResponse($message, Response::HTTP_BAD_REQUEST);
+    }
+
+    private function error404s(){
+        $message = [
+            'code' => Response::HTTP_NOT_FOUND,
+            'message' => "No hay resultados para la búsqueda realizada"
+        ];
+        return new JsonResponse($message, Response::HTTP_NOT_FOUND);
     }
 }
