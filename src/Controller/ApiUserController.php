@@ -83,7 +83,7 @@ class ApiUserController extends AbstractController {
         $query->setParameter('search', '%'.$username.'%');
 
         $users = $query->getResult();
-        return (empty($users))
+        return (empty($users) || empty($username))
             ? $this->error404s()
             : new JsonResponse(
                 ['users'=>$query->getResult()], Response::HTTP_OK);
