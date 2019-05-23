@@ -32,7 +32,7 @@ class ApiUserController extends AbstractController {
         $user = $em->getRepository(User::class)->findOneBy(array('username' => $data['username'], 'password' => $data['password']));
 
         return ($user === null)
-            ? $this->error404()
+            ? $this->error404login()
             : new JsonResponse(
                 ['userId'=>$user->getId()],
                 Response::HTTP_OK);
@@ -84,12 +84,12 @@ class ApiUserController extends AbstractController {
 
         $users = $query->getResult();
         return (empty($users) || empty($username))
-            ? $this->error404s()
+            ? $this->error404()
             : new JsonResponse(
                 ['users'=>$query->getResult()], Response::HTTP_OK);
     }
 
-    public function error404(): JsonResponse{
+    public function error404login(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
             'message' => "El usuario no existe o la contraseña es incorrecta"
@@ -105,7 +105,7 @@ class ApiUserController extends AbstractController {
         return new JsonResponse($message, Response::HTTP_BAD_REQUEST);
     }
 
-    private function error404s(){
+    private function error404(){
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
             'message' => "No hay resultados para la búsqueda realizada"
