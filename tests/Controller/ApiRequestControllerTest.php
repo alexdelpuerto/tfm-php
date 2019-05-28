@@ -19,7 +19,7 @@ class ApiRequestControllerTest extends WebTestCase{
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
-        self::$username = 'user6';
+        self::$username = 'user7';
         self::$usernameError = 'asdf';
     }
 
