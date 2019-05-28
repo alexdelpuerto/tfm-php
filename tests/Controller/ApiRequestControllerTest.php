@@ -3,7 +3,6 @@
 
 namespace App\Tests\Controller;
 
-
 use App\Controller\ApiRequestController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;

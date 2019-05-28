@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Gift
  *
@@ -18,41 +15,35 @@ class Gift implements \JsonSerializable {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=20, nullable=false)
      */
     private $name;
-
     /**
      * @var string|null
      *
      * @ORM\Column(name="description", type="string", length=200, nullable=true)
      */
     private $description;
-
     /**
      * @var float
      *
      * @ORM\Column(name="price", type="float", precision=10, scale=0, nullable=false)
      */
     private $price;
-
     /**
      * @var bool
      *
      * @ORM\Column(name="bought", type="boolean", options={"default" = false})
      */
     private $bought;
-
     /**
      *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="gift")
      */
     private $event;
-
     /**
      * Gift constructor.
      * @param string $name
@@ -70,7 +61,6 @@ class Gift implements \JsonSerializable {
         $this->bought = $bought;
         $this->event = $event;
     }
-
     /**
      * @return int
      */
@@ -78,7 +68,6 @@ class Gift implements \JsonSerializable {
     {
         return $this->id;
     }
-
     /**
      * @param int $id
      */
@@ -86,7 +75,6 @@ class Gift implements \JsonSerializable {
     {
         $this->id = $id;
     }
-
     /**
      * @return string
      */
@@ -94,7 +82,6 @@ class Gift implements \JsonSerializable {
     {
         return $this->name;
     }
-
     /**
      * @param string $name
      */
@@ -102,7 +89,6 @@ class Gift implements \JsonSerializable {
     {
         $this->name = $name;
     }
-
     /**
      * @return string|null
      */
@@ -110,7 +96,6 @@ class Gift implements \JsonSerializable {
     {
         return $this->description;
     }
-
     /**
      * @param string|null $description
      */
@@ -118,7 +103,6 @@ class Gift implements \JsonSerializable {
     {
         $this->description = $description;
     }
-
     /**
      * @return float
      */
@@ -126,7 +110,6 @@ class Gift implements \JsonSerializable {
     {
         return $this->price;
     }
-
     /**
      * @param float $price
      */
@@ -134,7 +117,6 @@ class Gift implements \JsonSerializable {
     {
         $this->price = $price;
     }
-
     /**
      * @return bool
      */
@@ -142,7 +124,6 @@ class Gift implements \JsonSerializable {
     {
         return $this->bought;
     }
-
     /**
      * @param bool $bought
      */
@@ -150,7 +131,6 @@ class Gift implements \JsonSerializable {
     {
         $this->bought = $bought;
     }
-
     /**
      * @return Event
      */
@@ -158,7 +138,6 @@ class Gift implements \JsonSerializable {
     {
         return $this->event;
     }
-
     /**
      * @param Event $event
      */
@@ -166,7 +145,6 @@ class Gift implements \JsonSerializable {
     {
         $this->event = $event;
     }
-
     public function jsonSerialize()
     {
         return array(

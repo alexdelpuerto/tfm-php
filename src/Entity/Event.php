@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Event
  *
@@ -20,41 +17,35 @@ class Event implements \JsonSerializable {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=30, nullable=false)
      */
     private $name;
-
     /**
      * @var float
      *
      * @ORM\Column(name="budget", type="float", precision=10, scale=0, nullable=false)
      */
     private $budget;
-
     /**
      * @var string
      *
      *   @ORM\Column(name="creator", type="string", length=20, nullable=false)
      */
     private $creator;
-
     /**
      * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="event")
      */
     private $user;
-
     /**
      * @var Collection $gift
      * @ORM\OneToMany(targetEntity="Gift", mappedBy="event")
      */
     protected $gift;
-
     /**
      * Event constructor.
      * @param string $name
@@ -70,17 +61,14 @@ class Event implements \JsonSerializable {
         $this->user = new ArrayCollection();
         $this->gift = new ArrayCollection();
     }
-
     public function addUser(User $user){
         $this->user[]=$user;
         return $this;
     }
-
     public function addGift(Gift $gift){
         $this->gift[]=$gift;
         return $this;
     }
-
     /**
      * @return int
      */
@@ -88,7 +76,6 @@ class Event implements \JsonSerializable {
     {
         return $this->id;
     }
-
     /**
      * @param int $id
      */
@@ -96,7 +83,6 @@ class Event implements \JsonSerializable {
     {
         $this->id = $id;
     }
-
     /**
      * @return string
      */
@@ -104,7 +90,6 @@ class Event implements \JsonSerializable {
     {
         return $this->name;
     }
-
     /**
      * @param string $name
      */
@@ -112,7 +97,6 @@ class Event implements \JsonSerializable {
     {
         $this->name = $name;
     }
-
     /**
      * @return float
      */
@@ -120,7 +104,6 @@ class Event implements \JsonSerializable {
     {
         return $this->budget;
     }
-
     /**
      * @param float $budget
      */
@@ -128,7 +111,6 @@ class Event implements \JsonSerializable {
     {
         $this->budget = $budget;
     }
-
     /**
      * @return string
      */
@@ -136,7 +118,6 @@ class Event implements \JsonSerializable {
     {
         return $this->creator;
     }
-
     /**
      * @param string $creator
      */
@@ -144,7 +125,6 @@ class Event implements \JsonSerializable {
     {
         $this->creator = $creator;
     }
-
     /**
      * @return Collection
      */
@@ -152,7 +132,6 @@ class Event implements \JsonSerializable {
     {
         return $this->user;
     }
-
     /**
      * @param Collection $user
      */
@@ -160,7 +139,6 @@ class Event implements \JsonSerializable {
     {
         $this->user = $user;
     }
-
     /**
      * @return Collection
      */
@@ -168,7 +146,6 @@ class Event implements \JsonSerializable {
     {
         return $this->gift;
     }
-
     /**
      * @param Collection $gifts
      */
@@ -176,9 +153,6 @@ class Event implements \JsonSerializable {
     {
         $this->gift = $gifts;
     }
-
-
-
     public function jsonSerialize()
     {
         return array(
