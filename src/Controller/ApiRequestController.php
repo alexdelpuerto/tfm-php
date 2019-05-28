@@ -26,7 +26,7 @@ class ApiRequestController extends AbstractController {
      */
     public function getRequests($username): Response {
         $em = $this->getDoctrine()->getManager();
-        $requests = $em->getRepository(Request::class)->findBy(array('userSend' => $username));
+        $requests = $em->getRepository(Request::class)->findBy(array('userReceive' => $username));
 
         return (empty($requests))
             ? $this->error404()
