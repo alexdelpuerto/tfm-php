@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * User
  *
@@ -22,35 +19,30 @@ class User implements \JsonSerializable
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=20, nullable=false)
      */
     private $username;
-
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=20, nullable=false)
      */
     private $password;
-
     /**
      * @var string|null
      *
      * @ORM\Column(name="name", type="string", length=20, nullable=true)
      */
     private $name;
-
     /**
      * @var string|null
      *
      * @ORM\Column(name="surname", type="string", length=25, nullable=true)
      */
     private $surname;
-
     /**
      * @var Collection
      *
@@ -65,7 +57,6 @@ class User implements \JsonSerializable
      * )
      */
     private $event;
-
     /**
      * User constructor.
      * @param string $username
@@ -82,12 +73,10 @@ class User implements \JsonSerializable
         $this->surname = $surname;
         $this->event = new ArrayCollection();
     }
-
     public function addEvent(Event $event){
         $this->event[]=$event;
         return $this;
     }
-
     /**
      * @return int
      */
@@ -95,7 +84,6 @@ class User implements \JsonSerializable
     {
         return $this->id;
     }
-
     /**
      * @param int $id
      */
@@ -103,7 +91,6 @@ class User implements \JsonSerializable
     {
         $this->id = $id;
     }
-
     /**
      * @return string
      */
@@ -111,7 +98,6 @@ class User implements \JsonSerializable
     {
         return $this->username;
     }
-
     /**
      * @param string $username
      */
@@ -119,7 +105,6 @@ class User implements \JsonSerializable
     {
         $this->username = $username;
     }
-
     /**
      * @return string
      */
@@ -127,7 +112,6 @@ class User implements \JsonSerializable
     {
         return $this->password;
     }
-
     /**
      * @param string $password
      */
@@ -135,7 +119,6 @@ class User implements \JsonSerializable
     {
         $this->password = $password;
     }
-
     /**
      * @return string|null
      */
@@ -143,7 +126,6 @@ class User implements \JsonSerializable
     {
         return $this->name;
     }
-
     /**
      * @param string|null $name
      */
@@ -151,7 +133,6 @@ class User implements \JsonSerializable
     {
         $this->name = $name;
     }
-
     /**
      * @return string|null
      */
@@ -159,7 +140,6 @@ class User implements \JsonSerializable
     {
         return $this->surname;
     }
-
     /**
      * @param string|null $surname
      */
@@ -167,7 +147,6 @@ class User implements \JsonSerializable
     {
         $this->surname = $surname;
     }
-
     /**
      * @return Collection
      */
@@ -175,7 +154,6 @@ class User implements \JsonSerializable
     {
         return $this->event;
     }
-
     /**
      * @param Collection $event
      */
@@ -183,7 +161,6 @@ class User implements \JsonSerializable
     {
         $this->event = $event;
     }
-
     public function jsonSerialize()
     {
         return array(

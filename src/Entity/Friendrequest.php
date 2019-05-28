@@ -1,16 +1,13 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Request
  *
- * @ORM\Table(name="request")
+ * @ORM\Table(name="friendrequest")
  * @ORM\Entity
  */
-class Request implements \JsonSerializable {
+class Friendrequest implements \JsonSerializable {
     /**
      * @var int
      *
@@ -19,21 +16,18 @@ class Request implements \JsonSerializable {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="user_send", type="string", length=20, nullable=false)
      */
     private $userSend;
-
     /**
      * @var string
      *
      * @ORM\Column(name="user_receive", type="string", length=20, nullable=false)
      */
     private $userReceive;
-
     /**
      * Request constructor.
      * @param string $userSend
@@ -45,7 +39,6 @@ class Request implements \JsonSerializable {
         $this->userSend = $userSend;
         $this->userReceive = $userReceive;
     }
-
     /**
      * @return int
      */
@@ -53,7 +46,6 @@ class Request implements \JsonSerializable {
     {
         return $this->id;
     }
-
     /**
      * @param int $id
      */
@@ -61,7 +53,6 @@ class Request implements \JsonSerializable {
     {
         $this->id = $id;
     }
-
     /**
      * @return string
      */
@@ -69,7 +60,6 @@ class Request implements \JsonSerializable {
     {
         return $this->userSend;
     }
-
     /**
      * @param string $userSend
      */
@@ -77,7 +67,6 @@ class Request implements \JsonSerializable {
     {
         $this->userSend = $userSend;
     }
-
     /**
      * @return string
      */
@@ -85,7 +74,6 @@ class Request implements \JsonSerializable {
     {
         return $this->userReceive;
     }
-
     /**
      * @param string $userReceive
      */
@@ -93,7 +81,6 @@ class Request implements \JsonSerializable {
     {
         $this->userReceive = $userReceive;
     }
-
     public function jsonSerialize()
     {
         return array(

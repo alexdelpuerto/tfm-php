@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Payment
  *
@@ -19,35 +16,30 @@ class Payment implements \JsonSerializable {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="buyer", type="string", length=20, nullable=false)
      */
     private $buyer;
-
     /**
      * @var string
      *
      * @ORM\Column(name="person", type="string", length=20, nullable=false)
      */
     private $person;
-
     /**
      * @var float
      *
      * @ORM\Column(name="price", type="float", precision=10, scale=0, nullable=false)
      */
     private $price;
-
     /**
      * @var string
      *
      * @ORM\Column(name="giftName", type="string", length=20, nullable=false)
      */
     private $giftname;
-
     /**
      * Payment constructor.
      * @param string $buyer
@@ -63,7 +55,6 @@ class Payment implements \JsonSerializable {
         $this->price = $price;
         $this->giftname = $giftname;
     }
-
     /**
      * @return int
      */
@@ -71,7 +62,6 @@ class Payment implements \JsonSerializable {
     {
         return $this->id;
     }
-
     /**
      * @param int $id
      */
@@ -79,7 +69,6 @@ class Payment implements \JsonSerializable {
     {
         $this->id = $id;
     }
-
     /**
      * @return string
      */
@@ -87,7 +76,6 @@ class Payment implements \JsonSerializable {
     {
         return $this->buyer;
     }
-
     /**
      * @param string $buyer
      */
@@ -95,7 +83,6 @@ class Payment implements \JsonSerializable {
     {
         $this->buyer = $buyer;
     }
-
     /**
      * @return string
      */
@@ -103,7 +90,6 @@ class Payment implements \JsonSerializable {
     {
         return $this->person;
     }
-
     /**
      * @param string $person
      */
@@ -111,7 +97,6 @@ class Payment implements \JsonSerializable {
     {
         $this->person = $person;
     }
-
     /**
      * @return float
      */
@@ -119,7 +104,6 @@ class Payment implements \JsonSerializable {
     {
         return $this->price;
     }
-
     /**
      * @param float $price
      */
@@ -127,7 +111,6 @@ class Payment implements \JsonSerializable {
     {
         $this->price = $price;
     }
-
     /**
      * @return string
      */
@@ -135,7 +118,6 @@ class Payment implements \JsonSerializable {
     {
         return $this->giftname;
     }
-
     /**
      * @param string $giftname
      */
@@ -143,7 +125,6 @@ class Payment implements \JsonSerializable {
     {
         $this->giftname = $giftname;
     }
-
     public function jsonSerialize()
     {
         return array(
