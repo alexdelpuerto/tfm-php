@@ -77,6 +77,6 @@ class ApiRequestController extends AbstractController {
             'code' => Response::HTTP_BAD_REQUEST,
             'message' => "Ya se le ha enviado una solicitud de amistad"
         ];
-        return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+        return new JsonResponse($message, Response::HTTP_BAD_REQUEST);
     }
 }
