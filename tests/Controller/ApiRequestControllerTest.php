@@ -85,4 +85,34 @@ class ApiRequestControllerTest extends WebTestCase{
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
     }
+
+    /**
+     * Implements testAcceptRequest
+     * @covers ::acceptRequest
+     */
+    public function testAcceptRequest(): void {
+        $data = [
+            'userSend'=>'user7',
+            'userReceive'=>'user6'
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiRequestController::REQUEST_API_PATH . '/accept',
+            [], [], [], json_encode($data));
+        self::assertEquals(Response::HTTP_CREATED, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testAcceptRequestError
+     * @covers ::acceptRequest
+     */
+    public function testAcceptRequestError(): void {
+        $data = [
+            'userSend'=>'user12345',
+            'userReceive'=>'user7'
+        ];
+
+        self::$client->request(Request::METHOD_POST, ApiRequestController::REQUEST_API_PATH . '/accept',
+            [], [], [], json_encode($data));
+        self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
+    }
 }

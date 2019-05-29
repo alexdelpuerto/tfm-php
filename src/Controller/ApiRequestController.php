@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Friendrequest;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,6 +65,42 @@ class ApiRequestController extends AbstractController {
         }
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route(path="/accept", name="accept", methods={"POST"})
+     */
+    public function acceptRequest(Request $request): Response{
+        $dataRequest = $request->getContent();
+        $data = json_decode($dataRequest, true);
+
+        $em = $this->getDoctrine()->getManager();
+        $userExist = $em->getRepository(User::class)->findOneBy(array('username' => $data['userSend']));
+        $userReceive = $em->getRepository(User::class)->findOneBy(array('username' => $data['userReceive']));
+
+        if($userExist == null){
+            return $this->error404user();
+        } else {
+            $userExist->addFriend($userReceive);
+            $em->persist($userExist);
+            $em->flush();
+
+            /*  Cuando se añade a amigos, hay que borrar la solicitud.
+                El método cancelRequest también se llama al pulsar sobre cancel, en las peticiones.
+
+                $this->cancelRequest($data);
+            */
+
+            return new JsonResponse(
+                [],Response::HTTP_CREATED
+            );
+        }
+    }
+
+    public function cancelRequest(Request $request): Response{
+
+    }
+
     private function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
@@ -78,5 +115,13 @@ class ApiRequestController extends AbstractController {
             'message' => "Ya se le ha enviado una solicitud de amistad"
         ];
         return new JsonResponse($message, Response::HTTP_BAD_REQUEST);
+    }
+
+    private function error404user(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_NOT_FOUND,
+            'message' => "No existe el usuario"
+        ];
+        return new JsonResponse($message, Response::HTTP_NOT_FOUND);
     }
 }
