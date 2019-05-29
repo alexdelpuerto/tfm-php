@@ -92,7 +92,7 @@ class ApiRequestController extends AbstractController {
             */
 
             return new JsonResponse(
-                Response::HTTP_CREATED
+                [],Response::HTTP_CREATED
             );
         }
     }
