@@ -89,6 +89,21 @@ class ApiUserController extends AbstractController {
                 ['users'=>$query->getResult()], Response::HTTP_OK);
     }
 
+    /**
+     * @param $username
+     * @return Response
+     * @Route(path="/ejemplo/{username}", name="get", methods={"GET"})
+     */
+    public function ejemplo($username): Response{
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(array('username' => $username));
+        $friends = $user->getMyFriends()->getValues();
+        $otherfriends = $user->getFriendsWithMe()->getValues();
+        $totalFriends = array_merge($friends, $otherfriends);
+
+        return new JsonResponse(['ejemplo'=> $totalFriends]);
+    }
+
     public function error404login(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,

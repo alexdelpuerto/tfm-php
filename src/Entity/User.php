@@ -57,6 +57,20 @@ class User implements \JsonSerializable
      * )
      */
     private $event;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="myFriends")
+     */
+    private $friendsWithMe;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="friendsWithMe")
+     * @ORM\JoinTable(name="friends",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="friend_user_id", referencedColumnName="id")}
+     *      )
+     */
+    private $myFriends;
     /**
      * User constructor.
      * @param string $username
@@ -72,7 +86,10 @@ class User implements \JsonSerializable
         $this->name = $name;
         $this->surname = $surname;
         $this->event = new ArrayCollection();
+        $this->friendsWithMe = new ArrayCollection();
+        $this->myFriends = new ArrayCollection();
     }
+
     public function addEvent(Event $event){
         $this->event[]=$event;
         return $this;
@@ -161,6 +178,40 @@ class User implements \JsonSerializable
     {
         $this->event = $event;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMyFriends(): Collection
+    {
+        return $this->myFriends;
+    }
+
+    /**
+     * @param mixed $myFriends
+     */
+    public function setMyFriends(Collection $myFriends): void
+    {
+        $this->myFriends = $myFriends;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFriendsWithMe(): Collection
+    {
+        return $this->friendsWithMe;
+    }
+
+    /**
+     * @param mixed $friendsWithMe
+     */
+    public function setFriendsWithMe(Collection $friendsWithMe): void
+    {
+        $this->friendsWithMe = $friendsWithMe;
+    }
+
+
     public function jsonSerialize()
     {
         return array(
@@ -169,7 +220,8 @@ class User implements \JsonSerializable
             'password'  => $this->password,
             'name'      => $this->name,
             'surname'   => $this->surname,
-            'events'    => $this->event
+            'events'    => $this->event,
+            'friends'   => $this->myFriends
         );
     }
 }
