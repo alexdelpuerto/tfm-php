@@ -211,6 +211,10 @@ class User implements \JsonSerializable
         $this->friendsWithMe = $friendsWithMe;
     }
 
+    public function addFriend(User $user){
+        $this->myFriends[] = $user;
+        return $this;
+    }
 
     public function jsonSerialize()
     {
