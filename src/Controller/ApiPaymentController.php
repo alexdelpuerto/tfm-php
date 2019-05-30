@@ -87,6 +87,20 @@ class ApiPaymentController extends AbstractController{
                 ['payments'=>$payment], Response::HTTP_OK);
     }
 
+    /**
+     * @param int $paymentId
+     * @return Response
+     * @Route(path="/{paymentId}", name="delete", methods={"DELETE"})
+     */
+    public function deletePayments(int $paymentId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $collection = $em->getRepository(Payment::class)->find($paymentId);
+
+        $em->remove($collection);
+        $em->flush();
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
+
     private function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
