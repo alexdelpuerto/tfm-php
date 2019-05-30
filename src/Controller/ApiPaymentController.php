@@ -90,6 +90,20 @@ class ApiPaymentController extends AbstractController{
     /**
      * @param int $paymentId
      * @return Response
+     * @Route(path="/{paymentId}", name="options", methods={"OPTIONS"})
+     */
+    public function optionsPayments(int $paymentId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository(Payment::class)->find($paymentId);
+
+        if($result != null){
+            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
+        }
+    }
+
+    /**
+     * @param int $paymentId
+     * @return Response
      * @Route(path="/{paymentId}", name="delete", methods={"DELETE"})
      */
     public function deletePayments(int $paymentId): Response {

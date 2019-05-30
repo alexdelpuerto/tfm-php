@@ -17,12 +17,16 @@ class ApiPaymentControllerTest extends WebTestCase{
     public static $username;
     public static $usernameError;
     public static $paymentId;
+    public static $paymentIdOpt;
+    public static $paymentIdOptErr;
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
         self::$username = 'user7';
         self::$usernameError = 'user75';
         self::$paymentId = 13;
+        self::$paymentIdOpt = 1;
+        self::$paymentIdOptErr = 100;
     }
 
     /**
@@ -107,5 +111,23 @@ class ApiPaymentControllerTest extends WebTestCase{
     public function testDeletePayments(): void{
         self::$client->request(Request::METHOD_DELETE, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$paymentId);
         self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testOptionsPayments
+     * @covers ::optionsPayments
+     */
+    public function testOptionsPayments(): void {
+        self::$client->request(Request::METHOD_OPTIONS, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$paymentIdOpt);
+        $head = self::$client->getResponse()->headers->get("Allow");
+        self::assertEquals($this->optionsPayments(), $head);
+    }
+
+    public function optionsPayments():string {
+        return
+            Request::METHOD_GET . ', ' .
+            Request::METHOD_PUT . ', ' .
+            Request::METHOD_DELETE . ', ' .
+            Request::METHOD_OPTIONS;
     }
 }
