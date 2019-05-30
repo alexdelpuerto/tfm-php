@@ -16,11 +16,13 @@ class ApiPaymentControllerTest extends WebTestCase{
 
     public static $username;
     public static $usernameError;
+    public static $paymentId;
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
         self::$username = 'user7';
         self::$usernameError = 'user75';
+        self::$paymentId = 13;
     }
 
     /**
@@ -96,5 +98,14 @@ class ApiPaymentControllerTest extends WebTestCase{
         self::assertArrayHasKey('code', $message);
         self::assertArrayHasKey('message', $message);
         self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
+    }
+
+    /**
+     * Implements testDeletePayments
+     * @covers ::deletePayments
+     */
+    public function testDeletePayments(): void{
+        self::$client->request(Request::METHOD_DELETE, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$paymentId);
+        self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
     }
 }
