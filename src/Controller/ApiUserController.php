@@ -75,7 +75,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param $username
      * @return Response
-     * @Route(path="/{username}", name="get", methods={"GET"})
+     * @Route(path="/{username}", name="search", methods={"GET"})
      */
     public function searchUsers($username): Response{
         $em = $this->getDoctrine()->getManager();
@@ -92,16 +92,18 @@ class ApiUserController extends AbstractController {
     /**
      * @param $username
      * @return Response
-     * @Route(path="/ejemplo/{username}", name="get", methods={"GET"})
+     * @Route(path="/friends/{username}", name="get_friends", methods={"GET"})
      */
-    public function ejemplo($username): Response{
+    public function getFriends($username): Response{
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy(array('username' => $username));
         $friends = $user->getMyFriends()->getValues();
         $otherfriends = $user->getFriendsWithMe()->getValues();
         $totalFriends = array_merge($friends, $otherfriends);
 
-        return new JsonResponse(['ejemplo'=> $totalFriends]);
+        return (empty($totalFriends))
+            ? $this->error404()
+            : new JsonResponse(['friends'=> $totalFriends], Response::HTTP_OK);
     }
 
     public function error404login(): JsonResponse{
@@ -123,7 +125,7 @@ class ApiUserController extends AbstractController {
     private function error404(){
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
-            'message' => "No hay resultados para la búsqueda realizada"
+            'message' => "No hay resultados"
         ];
         return new JsonResponse($message, Response::HTTP_NOT_FOUND);
     }

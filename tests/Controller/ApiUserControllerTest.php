@@ -17,12 +17,16 @@ class ApiUserControllerTest extends WebTestCase{
     /**@var Client $client*/
     private static $client;
 
+    public static $username;
+    public static $usernameError;
     public static $searchUser;
     public static $searchUserError;
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
 
+        self::$username = 'user6';
+        self::$usernameError = 'user1';
         self::$searchUser = 'n';
         self::$searchUserError = '55';
     }
@@ -130,8 +134,42 @@ class ApiUserControllerTest extends WebTestCase{
         self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
     }
 
+    /**
+     * Implements testSearchUsersError
+     * @covers ::searchUsers
+     */
     public function testSearchUsersError(): void{
         self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$searchUserError);
+        self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $message = json_decode($body, true);
+        self::assertArrayHasKey('code', $message);
+        self::assertArrayHasKey('message', $message);
+        self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
+    }
+
+    /**
+     * Implements testGetFriends
+     * @covers ::getFriends
+     */
+    public function testGetFriends(): void {
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/friends/' . self::$username);
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('friends', $data);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testGetFriendsError
+     * @covers ::getFriends
+     */
+    public function testGetFriendsError(): void {
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/friends/' . self::$usernameError);
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
