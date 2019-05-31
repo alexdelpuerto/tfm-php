@@ -103,7 +103,7 @@ class ApiUserController extends AbstractController {
 
         return (empty($totalFriends))
             ? $this->error404()
-            : new JsonResponse(['friends'=> $totalFriends]);
+            : new JsonResponse(['friends'=> $totalFriends], Response::HTTP_OK);
     }
 
     public function error404login(): JsonResponse{
