@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -75,7 +76,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param $username
      * @return Response
-     * @Route(path="/{username}", name="search", methods={"GET"})
+     * @Route(path="/search/{username}", name="search", methods={"GET"})
      */
     public function searchUsers($username): Response{
         $em = $this->getDoctrine()->getManager();
@@ -92,7 +93,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param $username
      * @return Response
-     * @Route(path="/friends/{username}", name="get_friends", methods={"GET"})
+     * @Route(path="/friends/{username}", name="getFriends", methods={"GET"})
      */
     public function getFriends($username): Response{
         $em = $this->getDoctrine()->getManager();
@@ -104,6 +105,42 @@ class ApiUserController extends AbstractController {
         return (empty($totalFriends))
             ? $this->error404()
             : new JsonResponse(['friends'=> $totalFriends], Response::HTTP_OK);
+    }
+
+    /**
+     * @param $eventId
+     * @return Response
+     * @Route(path="/{eventId}", name="getUsers", methods={"GET"})
+     */
+    public function getUsers($eventId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(Event::class)->find($eventId)->getUser()->getValues();
+
+        return new JsonResponse(['users'=>$users], Response::HTTP_OK);
+    }
+
+    /**
+     * @param int $eventId
+     * @param Request $request
+     * @return Response
+     * @Route(path="/{eventId}", name="patch", methods={"PATCH"})
+     */
+    public function addUser(int $eventId, Request $request): Response {
+        $em= $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Event::class)->find($eventId);
+
+        $dataRequest = $request->getContent();
+        $data = json_decode($dataRequest, true);
+
+        $user = $em->getRepository(User::class)->find($data['id']);
+        $event->addUser($user);
+        $user->addEvent($event);
+
+        $em->persist($event);
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse([], 209);
     }
 
     public function error404login(): JsonResponse{
