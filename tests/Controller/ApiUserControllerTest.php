@@ -21,6 +21,7 @@ class ApiUserControllerTest extends WebTestCase{
     public static $usernameError;
     public static $searchUser;
     public static $searchUserError;
+    public static $eventId;
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
@@ -29,6 +30,7 @@ class ApiUserControllerTest extends WebTestCase{
         self::$usernameError = 'user1';
         self::$searchUser = 'n';
         self::$searchUserError = '55';
+        self::$eventId = 2;
     }
 
     /**
@@ -125,7 +127,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::searchUsers
      */
     public function testSearchUsers(): void {
-        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$searchUser);
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/search/' . self::$searchUser);
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
 
@@ -139,7 +141,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::searchUsers
      */
     public function testSearchUsersError(): void{
-        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$searchUserError);
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/search/' . self::$searchUserError);
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
@@ -178,5 +180,33 @@ class ApiUserControllerTest extends WebTestCase{
         self::assertArrayHasKey('code', $message);
         self::assertArrayHasKey('message', $message);
         self::assertEquals(Response::HTTP_NOT_FOUND, $message['code']);
+    }
+
+    /**
+     * Implements testGetUsers
+     * @covers ::getUsers
+     */
+    public function testGetUsers(): void {
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$eventId);
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('users', $data);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testAddUser
+     * @covers ::addUser
+     */
+    public function testAddUser(): void {
+        $data = [
+            'id'=> 2
+        ];
+
+        self::$client->request(Request::METHOD_PATCH, ApiUserController::USER_API_PATH . '/' . self::$eventId,
+            [],[],[],json_encode($data));
+        self::assertEquals(209, self::$client->getResponse()->getStatusCode());
     }
 }

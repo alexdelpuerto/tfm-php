@@ -116,7 +116,7 @@ class ApiUserController extends AbstractController {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository(Event::class)->find($eventId)->getUser()->getValues();
 
-        return new JsonResponse(['users'=>$users]);
+        return new JsonResponse(['users'=>$users], Response::HTTP_OK);
     }
 
     /**
