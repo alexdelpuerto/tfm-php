@@ -123,7 +123,7 @@ class ApiUserController extends AbstractController {
      * @param int $eventId
      * @param Request $request
      * @return Response
-     * @Route(path="/{eventId}", name="patch", methods={"PATCH"})
+     * @Route(path="/{eventId}", name="patch", methods={"PUT"})
      */
     public function addUser(int $eventId, Request $request): Response {
         $em= $this->getDoctrine()->getManager();
@@ -153,7 +153,7 @@ class ApiUserController extends AbstractController {
         $result = $em->getRepository(Event::class)->find($eventId);
 
         if($result != null){
-            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, PATCH, DELETE, OPTIONS']);
+            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
         }
     }
 

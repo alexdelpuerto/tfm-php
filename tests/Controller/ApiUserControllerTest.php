@@ -205,7 +205,7 @@ class ApiUserControllerTest extends WebTestCase{
             'id'=> 2
         ];
 
-        self::$client->request(Request::METHOD_PATCH, ApiUserController::USER_API_PATH . '/' . self::$eventId,
+        self::$client->request(Request::METHOD_PUT, ApiUserController::USER_API_PATH . '/' . self::$eventId,
             [],[],[],json_encode($data));
         self::assertEquals(209, self::$client->getResponse()->getStatusCode());
     }
@@ -224,7 +224,6 @@ class ApiUserControllerTest extends WebTestCase{
         return
             Request::METHOD_GET . ', ' .
             Request::METHOD_PUT . ', ' .
-            Request::METHOD_PATCH . ', ' .
             Request::METHOD_DELETE . ', ' .
             Request::METHOD_OPTIONS;
     }
