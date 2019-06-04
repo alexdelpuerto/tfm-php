@@ -209,4 +209,23 @@ class ApiUserControllerTest extends WebTestCase{
             [],[],[],json_encode($data));
         self::assertEquals(209, self::$client->getResponse()->getStatusCode());
     }
+
+    /**
+     * Implements testOptionsUsers
+     * @covers ::optionsUsers
+     */
+    public function testOptionsUsers(): void {
+        self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/' . self::$eventId);
+        $head = self::$client->getResponse()->headers->get("Allow");
+        self::assertEquals($this->optionsUsers(), $head);
+    }
+
+    public function optionsUsers():string {
+        return
+            Request::METHOD_GET . ', ' .
+            Request::METHOD_PUT . ', ' .
+            Request::METHOD_PATCH . ', ' .
+            Request::METHOD_DELETE . ', ' .
+            Request::METHOD_OPTIONS;
+    }
 }

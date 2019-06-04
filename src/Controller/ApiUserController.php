@@ -143,6 +143,20 @@ class ApiUserController extends AbstractController {
         return new JsonResponse([], 209);
     }
 
+    /**
+     * @param int $eventId
+     * @return Response
+     * @Route(path="/{eventId}", name="options", methods={"OPTIONS"})
+     */
+    public function optionsUsers(int $eventId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository(Event::class)->find($eventId);
+
+        if($result != null){
+            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, PATCH, DELETE, OPTIONS']);
+        }
+    }
+
     public function error404login(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
