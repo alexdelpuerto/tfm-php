@@ -22,6 +22,7 @@ class ApiUserControllerTest extends WebTestCase{
     public static $searchUser;
     public static $searchUserError;
     public static $eventId;
+    public static $userId;
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
@@ -31,6 +32,7 @@ class ApiUserControllerTest extends WebTestCase{
         self::$searchUser = 'n';
         self::$searchUserError = '55';
         self::$eventId = 2;
+        self::$userId = 9;
     }
 
     /**
@@ -218,6 +220,61 @@ class ApiUserControllerTest extends WebTestCase{
         self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/' . self::$eventId);
         $head = self::$client->getResponse()->headers->get("Allow");
         self::assertEquals($this->optionsUsers(), $head);
+    }
+
+    /**
+     * Implements testGetAUser
+     * #@covers ::getAUser
+     */
+    public function testGetAUser(): void {
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$userId);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('user', $data);
+        self::assertEquals(self::$userId, $data['user']['id']);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @return int
+     * Implements testPutUser
+     * @covers ::putUser
+     */
+    public function testPutUser(): int {
+        $data = [
+            'username'=> 'nuev',
+            'password'=>'nuevo',
+            'name'=>'n',
+            'surname'=>'n'
+        ];
+
+        self::$client->request(Request::METHOD_PUT, ApiUserController::USER_API_PATH . '/' . self::$userId,
+            [],[],[],json_encode($data));
+        self::assertEquals(209, self::$client->getResponse()->getStatusCode());
+
+        $body = self::$client->getResponse()->getContent();
+        $dataDecoder = json_decode($body, true);
+        return $dataDecoder['user']['id'];
+    }
+
+    /**
+     * Implements testPutUserError
+     * @covers ::putUser
+     */
+    public function testPutUserError(): void {
+        $data = [
+            'username'=> 'user1',
+            'password'=>'nuevo',
+            'name'=>'n',
+            'surname'=>'n'
+        ];
+
+        self::$client->request(Request::METHOD_PUT, ApiUserController::USER_API_PATH . '/' . self::$userId,
+            [],[],[],json_encode($data));
+        self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
     }
 
     public function optionsUsers():string {
