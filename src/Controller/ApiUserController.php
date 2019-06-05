@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiUserController extends AbstractController {
 
     public const USER_API_PATH = '/api/v1/users';
-    public const LOGIN = '/login';
 
     /**
      * @param Request $request
@@ -110,7 +109,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param $eventId
      * @return Response
-     * @Route(path="/{eventId}", name="getUsers", methods={"GET"})
+     * @Route(path="/event/{eventId}", name="getUsers", methods={"GET"})
      */
     public function getUsers($eventId): Response {
         $em = $this->getDoctrine()->getManager();
@@ -123,9 +122,9 @@ class ApiUserController extends AbstractController {
      * @param int $eventId
      * @param Request $request
      * @return Response
-     * @Route(path="/{eventId}", name="patch", methods={"PUT"})
+     * @Route(path="/event/{eventId}", name="add", methods={"PUT"})
      */
-    public function addUser(int $eventId, Request $request): Response {
+    public function addUser(int $eventId, $request): Response {
         $em= $this->getDoctrine()->getManager();
         $event = $em->getRepository(Event::class)->find($eventId);
 
@@ -146,7 +145,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param int $eventId
      * @return Response
-     * @Route(path="/{eventId}", name="options", methods={"OPTIONS"})
+     * @Route(path="/event/{eventId}", name="options", methods={"OPTIONS"})
      */
     public function optionsUsers(int $eventId): Response {
         $em = $this->getDoctrine()->getManager();
@@ -154,6 +153,55 @@ class ApiUserController extends AbstractController {
 
         if($result != null){
             return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
+        }
+    }
+
+    /**
+     * @param $userId
+     * @return Response
+     * @Route(path="/{userId}", name="getUser", methods={"GET"})
+     */
+    public function getAUser($userId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($userId);
+
+        if($user != null) {
+            return new JsonResponse(['user'=>$user], Response::HTTP_OK);
+        }
+    }
+
+    /**
+     * @param $userId
+     * @param Request $request
+     * @return Response
+     * @Route(path="/{userId}", name="put", methods={"PUT"})
+     */
+    public function putUser($userId, $request): Response {
+        $em= $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($userId);
+
+        if($user != null) {
+            $dataRequest = $request->getContent();
+            $data = json_decode($dataRequest, true);
+
+            $user->setUsername($data['username']??$user->getUsername());
+            $user->setPassword($data['password']??$user->getPassword());
+            $user->setName($data['name']??$user->getName());
+            $user->setSurname($data['surname']??$user->getSurname());
+
+            $usernameExist = $em->getRepository(User::class)->findOneBy(array('username' => $user->getUsername()));
+
+            if($usernameExist !== null){
+                return $this->error400();
+            } else{
+                $em->persist($user);
+                $em->flush();
+
+                return new JsonResponse(
+                    ['user' => $user],
+                    209
+                );
+            }
         }
     }
 
