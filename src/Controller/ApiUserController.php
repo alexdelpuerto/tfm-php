@@ -124,7 +124,7 @@ class ApiUserController extends AbstractController {
      * @return Response
      * @Route(path="/event/{eventId}", name="add", methods={"PUT"})
      */
-    public function addUser(int $eventId, $request): Response {
+    public function addUser(int $eventId, Request $request): Response {
         $em= $this->getDoctrine()->getManager();
         $event = $em->getRepository(Event::class)->find($eventId);
 
@@ -161,7 +161,7 @@ class ApiUserController extends AbstractController {
      * @return Response
      * @Route(path="/{userId}", name="getUser", methods={"GET"})
      */
-    public function getAUser($userId): Response {
+    public function getAUser(int $userId): Response {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($userId);
 
@@ -176,7 +176,7 @@ class ApiUserController extends AbstractController {
      * @return Response
      * @Route(path="/{userId}", name="put", methods={"PUT"})
      */
-    public function putUser($userId, $request): Response {
+    public function putUser(int $userId, Request $request): Response {
         $em= $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($userId);
 
@@ -184,16 +184,16 @@ class ApiUserController extends AbstractController {
             $dataRequest = $request->getContent();
             $data = json_decode($dataRequest, true);
 
-            $user->setUsername($data['username']??$user->getUsername());
-            $user->setPassword($data['password']??$user->getPassword());
-            $user->setName($data['name']??$user->getName());
-            $user->setSurname($data['surname']??$user->getSurname());
+            $user->setPassword($data['password']);
+            $user->setName($data['name']);
+            $user->setSurname($data['surname']);
 
-            $usernameExist = $em->getRepository(User::class)->findOneBy(array('username' => $user->getUsername()));
+            $usernameExist = $em->getRepository(User::class)->findOneBy(array('username' => $data['username']));
 
-            if($usernameExist !== null){
+            if($usernameExist !== null && $usernameExist->getUsername() !== $user->getUsername()){
                 return $this->error400();
             } else{
+                $user->setUsername($data['username']);
                 $em->persist($user);
                 $em->flush();
 
