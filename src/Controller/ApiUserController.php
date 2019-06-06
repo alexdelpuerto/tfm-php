@@ -171,6 +171,20 @@ class ApiUserController extends AbstractController {
     }
 
     /**
+     * @param int $userId
+     * @return Response
+     * @Route(path="/{userId}", name="options", methods={"OPTIONS"})
+     */
+    public function optionsUser(int $userId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository(User::class)->find($userId);
+
+        if($result != null){
+            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
+        }
+    }
+
+    /**
      * @param $userId
      * @param Request $request
      * @return Response
