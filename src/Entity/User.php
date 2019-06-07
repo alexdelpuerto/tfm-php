@@ -223,9 +223,7 @@ class User implements \JsonSerializable
             'username'  => $this->username,
             'password'  => $this->password,
             'name'      => $this->name,
-            'surname'   => $this->surname,
-            'events'    => $this->event,
-            'friends'   => $this->myFriends
+            'surname'   => $this->surname
         );
     }
 }

@@ -51,8 +51,7 @@ class ApiUserController extends AbstractController {
             $data['username'],
             $data['password'],
             $data['name'],
-            $data['surname'],
-            $data['event']
+            $data['surname']
         );
 
         $em = $this->getDoctrine()->getManager();

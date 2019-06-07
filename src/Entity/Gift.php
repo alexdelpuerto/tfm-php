@@ -151,8 +151,7 @@ class Gift implements \JsonSerializable {
             'name'          => $this->name,
             'description'   => $this->description,
             'price'         => $this->price,
-            'bought'        => $this->bought,
-            'event'         => $this->event
+            'bought'        => $this->bought
         );
     }
 }
