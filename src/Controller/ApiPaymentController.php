@@ -29,7 +29,7 @@ class ApiPaymentController extends AbstractController{
         $data = json_decode($dataRequest, true);
 
         $em = $this->getDoctrine()->getManager();
-        $gift = $em->getRepository(Gift::class)->findOneBy(array('id' => $data['giftId']));
+        $gift = $em->getRepository(Gift::class)->findOneBy(array('name' => $data['giftname']));
 
         $price = $gift->getPrice();
 
