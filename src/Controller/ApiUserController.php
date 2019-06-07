@@ -74,16 +74,22 @@ class ApiUserController extends AbstractController {
 
     /**
      * @param $username
+     * @param $search
      * @return Response
-     * @Route(path="/search/{username}", name="search", methods={"GET"})
+     * @Route(path="/{username}/search/{search}", name="search", methods={"GET"})
      */
-    public function searchUsers($username): Response{
+    public function searchUsers($username, $search): Response{
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT u.id, u.username, u.name, u.surname FROM App\Entity\User u WHERE u.username LIKE :search');
-        $query->setParameter('search', '%'.$username.'%');
+
+        $query = $em->createQuery('SELECT u FROM App\Entity\User u WHERE u.username LIKE :search AND u.username != :username');
+
+        $query->setParameters(array(
+            'search' => '%'.$search.'%',
+            'username' => $username
+        ));
 
         $users = $query->getResult();
-        return (empty($users) || empty($username))
+        return (empty($users) || empty($search))
             ? $this->error404()
             : new JsonResponse(
                 ['users'=>$query->getResult()], Response::HTTP_OK);
