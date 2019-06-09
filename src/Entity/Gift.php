@@ -49,16 +49,15 @@ class Gift implements \JsonSerializable {
      * @param string $name
      * @param string|null $description
      * @param float $price
-     * @param bool $bought
      * @param Event $event
      */
-    public function __construct(string $name, ?string $description, float $price, bool $bought, Event $event)
+    public function __construct(string $name, ?string $description, float $price, Event $event)
     {
         $this->id = 0;
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
-        $this->bought = $bought;
+        $this->bought = false;
         $this->event = $event;
     }
     /**
@@ -152,8 +151,7 @@ class Gift implements \JsonSerializable {
             'name'          => $this->name,
             'description'   => $this->description,
             'price'         => $this->price,
-            'bought'        => $this->bought,
-            'event'         => $this->event
+            'bought'        => $this->bought
         );
     }
 }

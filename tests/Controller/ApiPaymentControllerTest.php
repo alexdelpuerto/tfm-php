@@ -105,19 +105,19 @@ class ApiPaymentControllerTest extends WebTestCase{
     }
 
     /**
-     * Implements testDeletePayments
-     * @covers ::deletePayments
+     * Implements testDeletePayment
+     * @covers ::deletePayment
      */
-    public function testDeletePayments(): void{
+    public function testDeletePayment(): void{
         self::$client->request(Request::METHOD_DELETE, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$paymentId);
         self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
     }
 
     /**
-     * Implements testOptionsPayments
-     * @covers ::optionsPayments
+     * Implements testOptionsPayment
+     * @covers ::optionsPayment
      */
-    public function testOptionsPayments(): void {
+    public function testOptionsPayment(): void {
         self::$client->request(Request::METHOD_OPTIONS, ApiPaymentController::PAYMENT_API_PATH . '/' . self::$paymentIdOpt);
         $head = self::$client->getResponse()->headers->get("Allow");
         self::assertEquals($this->optionsPayments(), $head);

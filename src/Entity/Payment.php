@@ -104,6 +104,7 @@ class Payment implements \JsonSerializable {
     {
         return $this->price;
     }
+
     /**
      * @param float $price
      */

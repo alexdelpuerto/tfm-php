@@ -53,10 +53,10 @@ class ApiRequestControllerTest extends WebTestCase{
     }
 
     /**
-     * Implements testPostRequests
-     * @covers ::postRequests
+     * Implements testPostRequest
+     * @covers ::postRequest
      */
-    public function testPostRequests(): int {
+    public function testPostRequest(): int {
         $data = [
             'userSend'=>'user7',
             'userReceive'=>'user6'
@@ -72,10 +72,10 @@ class ApiRequestControllerTest extends WebTestCase{
     }
 
     /**
-     * Implements testPostRequestsError
-     * @covers ::postRequests
+     * Implements testPostRequestError
+     * @covers ::postRequest
      */
-    public function testPostRequestsError(): void {
+    public function testPostRequestError(): void {
         $data = [
             'userSend'=>'user7',
             'userReceive'=>'user6'

@@ -159,9 +159,7 @@ class Event implements \JsonSerializable {
             'id'        => $this->id,
             'name'      => $this->name,
             'budget'    => $this->budget,
-            'creator'   => $this->creator,
-            'users'     => $this->user,
-            'gifts'     => $this->gift
+            'creator'   => $this->creator
         );
     }
 }
