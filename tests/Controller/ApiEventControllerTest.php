@@ -53,11 +53,11 @@ class ApiEventControllerTest extends WebTestCase{
     }
 
     /**
-     * Implements testPostEvents
+     * Implements testPostEvent
      * @return int
-     * @covers ::postEvents
+     * @covers ::postEvent
      */
-    public function testPostEvents():int{
+    public function testPostEvent():int{
         $data = [
             'name'=>'Event prueba',
             'budget'=>13.2,
@@ -74,10 +74,10 @@ class ApiEventControllerTest extends WebTestCase{
     }
 
     /**
-     * Implements testPostEventsError
-     * @covers ::postEvents
+     * Implements testPostEventError
+     * @covers ::postEvent
      */
-    public function testPostEventsError(): void{
+    public function testPostEventError(): void{
         $data = [
             'name'=>'Event prueba123',
             'budget'=>13.2,

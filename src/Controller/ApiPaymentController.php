@@ -92,7 +92,7 @@ class ApiPaymentController extends AbstractController{
      * @return Response
      * @Route(path="/{paymentId}", name="options", methods={"OPTIONS"})
      */
-    public function optionsPayments(int $paymentId): Response {
+    public function optionsPayment(int $paymentId): Response {
         $em = $this->getDoctrine()->getManager();
         $result = $em->getRepository(Payment::class)->find($paymentId);
 
@@ -106,7 +106,7 @@ class ApiPaymentController extends AbstractController{
      * @return Response
      * @Route(path="/{paymentId}", name="delete", methods={"DELETE"})
      */
-    public function deletePayments(int $paymentId): Response {
+    public function deletePayment(int $paymentId): Response {
         $em = $this->getDoctrine()->getManager();
         $collection = $em->getRepository(Payment::class)->find($paymentId);
 

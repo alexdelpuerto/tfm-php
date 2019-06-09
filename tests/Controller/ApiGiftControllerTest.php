@@ -55,11 +55,11 @@ class ApiGiftControllerTest extends WebTestCase {
     }
 
     /**
-     * Implements testPostGifts
+     * Implements testPostGift
      * @return int
-     * @covers ::postGifts
+     * @covers ::postGift
      */
-    public function testPostGifts():int{
+    public function testPostGift():int{
         $data = [
             'name'=>'Regalo prueba',
             'price'=>13.2,
@@ -77,10 +77,10 @@ class ApiGiftControllerTest extends WebTestCase {
     }
 
     /**
-     * Implements testPostGiftsError
-     * @covers ::postGifts
+     * Implements testPostGiftError
+     * @covers ::postGift
      */
-    public function testPostGiftsError(): void{
+    public function testPostGiftError(): void{
         $data = [
             'name'=>'Regalo prueba123',
             'price'=>13.2,

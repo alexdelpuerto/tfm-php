@@ -40,7 +40,7 @@ class ApiEventController extends AbstractController {
      * @return Response
      * @Route(path="", name="post", methods={"POST"})
      */
-    public function postEvents(Request $request):Response{
+    public function postEvent(Request $request):Response{
         $dataRequest = $request->getContent();
         $data = json_decode($dataRequest, true);
 

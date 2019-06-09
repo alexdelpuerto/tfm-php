@@ -41,7 +41,7 @@ class ApiGiftController extends AbstractController {
      * @return Response
      * @Route(path="", name="post", methods={"POST"})
      */
-    public function postGifts(Request $request): Response {
+    public function postGift(Request $request): Response {
         $dataRequest = $request->getContent();
         $data = json_decode($dataRequest, true);
 
