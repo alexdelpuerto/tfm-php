@@ -62,7 +62,7 @@ class ApiPaymentController extends AbstractController{
      * @return Response
      * @Route(path="Col/{username}", name="getCollections", methods={"GET"})
      */
-    public function getCollections($username): Response {
+    public function getCollections(string $username): Response {
         $em = $this->getDoctrine()->getManager();
         $collection = $em->getRepository(Payment::class)->findBy(array('buyer' => $username));
 
@@ -77,7 +77,7 @@ class ApiPaymentController extends AbstractController{
      * @return Response
      * @Route(path="/{username}", name="getPayments", methods={"GET"})
      */
-    public function getPayments($username): Response {
+    public function getPayments(string $username): Response {
         $em = $this->getDoctrine()->getManager();
         $payment = $em->getRepository(Payment::class)->findBy(array('person' => $username));
 

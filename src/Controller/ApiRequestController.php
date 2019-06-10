@@ -24,7 +24,7 @@ class ApiRequestController extends AbstractController {
      * @return Response
      * @Route(path="/{username}", name="get", methods={"GET"})
      */
-    public function getRequests($username): Response {
+    public function getRequests(string $username): Response {
         $em = $this->getDoctrine()->getManager();
         $friendrequests = $em->getRepository(Friendrequest::class)->findBy(array('userReceive' => $username));
 

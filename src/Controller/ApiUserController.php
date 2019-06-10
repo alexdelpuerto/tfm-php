@@ -77,7 +77,7 @@ class ApiUserController extends AbstractController {
      * @return Response
      * @Route(path="/{username}/search/{search}", name="search", methods={"GET"})
      */
-    public function searchUsers($username, $search): Response{
+    public function searchUsers(string $username, string $search): Response{
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->createQuery('SELECT u FROM App\Entity\User u WHERE u.username LIKE :search AND u.username != :username');
@@ -99,7 +99,7 @@ class ApiUserController extends AbstractController {
      * @return Response
      * @Route(path="/friends/{username}", name="getFriends", methods={"GET"})
      */
-    public function getFriends($username): Response{
+    public function getFriends(string $username): Response{
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy(array('username' => $username));
         $friends = $user->getMyFriends()->getValues();
@@ -116,7 +116,7 @@ class ApiUserController extends AbstractController {
      * @return Response
      * @Route(path="/event/{eventId}", name="getUsers", methods={"GET"})
      */
-    public function getUsers($eventId): Response {
+    public function getUsers(int $eventId): Response {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository(Event::class)->find($eventId)->getUser()->getValues();
 
