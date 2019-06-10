@@ -24,7 +24,7 @@ class ApiEventController extends AbstractController {
      * @return Response
      * @Route(path="/{userId}", name="get", methods={"GET"})
      */
-    public function getEvents($userId): Response {
+    public function getEvents(int $userId): Response {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($userId);
         $events = $user->getEvent()->getValues();

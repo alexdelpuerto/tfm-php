@@ -22,9 +22,9 @@ class ApiGiftController extends AbstractController {
     /**
      * @param $eventId
      * @return Response
-     * @Route(path="/{eventId}", name="get", methods={"GET"})
+     * @Route(path="/event/{eventId}", name="getGifts", methods={"GET"})
      */
-    public function getGifts($eventId): Response{
+    public function getGifts(int $eventId): Response{
 
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository(Event::class)->find($eventId);
@@ -64,6 +64,61 @@ class ApiGiftController extends AbstractController {
             return new JsonResponse(
                 ['gift' => $gift],
                 Response::HTTP_CREATED
+            );
+        }
+    }
+
+    /**
+     * @param $giftId
+     * @return Response
+     * @Route(path="/{giftId}", name="getGift", methods={"GET"})
+     */
+    public function getAGift(int $giftId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $gift = $em->getRepository(Gift::class)->find($giftId);
+
+        if($gift != null) {
+            return new JsonResponse(['gift'=>$gift], Response::HTTP_OK);
+        }
+    }
+
+    /**
+     * @param int $giftId
+     * @return Response
+     * @Route(path="/{giftId}", name="options", methods={"OPTIONS"})
+     */
+    public function optionsGift(int $giftId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository(Gift::class)->find($giftId);
+
+        if($result != null){
+            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
+        }
+    }
+
+    /**
+     * @param int $giftId
+     * @param Request $request
+     * @return Response
+     * @Route(path="/{giftId}", name="put", methods={"PUT"})
+     */
+    public function putGift(int $giftId, Request $request): Response {
+        $em= $this->getDoctrine()->getManager();
+        $gift = $em->getRepository(Gift::class)->find($giftId);
+
+        if($gift != null) {
+            $dataRequest = $request->getContent();
+            $data = json_decode($dataRequest, true);
+
+            $gift->setName($data['name']);
+            $gift->setDescription($data['description']);
+            $gift->setPrice($data['price']);
+
+            $em->persist($gift);
+            $em->flush();
+
+            return new JsonResponse(
+                ['gift' => $gift], 209
             );
         }
     }
