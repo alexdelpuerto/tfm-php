@@ -92,4 +92,58 @@ class ApiGiftControllerTest extends WebTestCase {
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
     }
+
+    /**
+     * Implements testGetAGift
+     * @covers ::getAGift
+     */
+    public function testGetAGift(): void {
+        self::$client->request(Request::METHOD_GET, ApiGiftController::GIFT_API_PATH . '/' . self::$giftId);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('gift', $data);
+        self::assertEquals(self::$giftId, $data['gift']['id']);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testOptionsGift
+     * @covers ::optionsGift
+     */
+    public function testOptionsGift(): void {
+        self::$client->request(Request::METHOD_OPTIONS, ApiGiftController::GIFT_API_PATH . '/' . self::$giftId);
+        $head = self::$client->getResponse()->headers->get("Allow");
+        self::assertEquals($this->optionsGifts(), $head);
+    }
+
+    /**
+     * Implements testPutGift
+     * @covers ::putGift
+     */
+    public function testPutGift(): int {
+        $data = [
+            'name'=> 'regalo6',
+            'description'=>'descripcion',
+            'price'=>2.5,
+        ];
+
+        self::$client->request(Request::METHOD_PUT, ApiGiftController::GIFT_API_PATH . '/' . self::$giftId,
+            [],[],[],json_encode($data));
+        self::assertEquals(209, self::$client->getResponse()->getStatusCode());
+
+        $body = self::$client->getResponse()->getContent();
+        $dataDecoder = json_decode($body, true);
+        return $dataDecoder['gift']['id'];
+    }
+
+    private function optionsGifts(): string {
+        return
+            Request::METHOD_GET . ', ' .
+            Request::METHOD_PUT . ', ' .
+            Request::METHOD_DELETE . ', ' .
+            Request::METHOD_OPTIONS;
+    }
 }

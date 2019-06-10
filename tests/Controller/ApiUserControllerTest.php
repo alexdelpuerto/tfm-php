@@ -129,7 +129,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::searchUsers
      */
     public function testSearchUsers(): void {
-        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/search/' . self::$searchUser);
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$username. '/search/' . self::$searchUser);
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
 
@@ -143,7 +143,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::searchUsers
      */
     public function testSearchUsersError(): void{
-        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/search/' . self::$searchUserError);
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$username . '/search/' . self::$searchUserError);
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
@@ -189,7 +189,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::getUsers
      */
     public function testGetUsers(): void {
-        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/' . self::$eventId);
+        self::$client->request(Request::METHOD_GET, ApiUserController::USER_API_PATH . '/event/' . self::$eventId);
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
 
@@ -207,7 +207,7 @@ class ApiUserControllerTest extends WebTestCase{
             'id'=> 2
         ];
 
-        self::$client->request(Request::METHOD_PUT, ApiUserController::USER_API_PATH . '/' . self::$eventId,
+        self::$client->request(Request::METHOD_PUT, ApiUserController::USER_API_PATH . '/event/' . self::$eventId,
             [],[],[],json_encode($data));
         self::assertEquals(209, self::$client->getResponse()->getStatusCode());
     }
@@ -217,7 +217,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::optionsUsers
      */
     public function testOptionsUsers(): void {
-        self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/' . self::$eventId);
+        self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/event/' . self::$eventId);
         $head = self::$client->getResponse()->headers->get("Allow");
         self::assertEquals($this->optionsUsers(), $head);
     }
@@ -236,6 +236,16 @@ class ApiUserControllerTest extends WebTestCase{
         self::assertArrayHasKey('user', $data);
         self::assertEquals(self::$userId, $data['user']['id']);
         self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testOptionsUser
+     * @covers ::optionsUser
+     */
+    public function testOptionsUser(): void {
+        self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/' . self::$userId);
+        $head = self::$client->getResponse()->headers->get("Allow");
+        self::assertEquals($this->optionsUsers(), $head);
     }
 
     /**

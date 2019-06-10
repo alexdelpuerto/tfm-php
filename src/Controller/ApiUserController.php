@@ -150,7 +150,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param int $eventId
      * @return Response
-     * @Route(path="/event/{eventId}", name="options", methods={"OPTIONS"})
+     * @Route(path="/event/{eventId}", name="optionsUsers", methods={"OPTIONS"})
      */
     public function optionsUsers(int $eventId): Response {
         $em = $this->getDoctrine()->getManager();
@@ -178,7 +178,7 @@ class ApiUserController extends AbstractController {
     /**
      * @param int $userId
      * @return Response
-     * @Route(path="/{userId}", name="options", methods={"OPTIONS"})
+     * @Route(path="/{userId}", name="optionsUser", methods={"OPTIONS"})
      */
     public function optionsUser(int $userId): Response {
         $em = $this->getDoctrine()->getManager();
