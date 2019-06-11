@@ -20,7 +20,7 @@ class ApiGiftControllerTest extends WebTestCase {
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
         self::$eventId = 2;
-        self::$eventIdError = 3;
+        self::$eventIdError = 6;
         self::$giftId = 6;
     }
 
@@ -29,7 +29,7 @@ class ApiGiftControllerTest extends WebTestCase {
      * @covers ::getGifts
      */
     public function testGetGifts(): void{
-        self::$client->request(Request::METHOD_GET, ApiGiftController::GIFT_API_PATH . '/' . self::$eventId);
+        self::$client->request(Request::METHOD_GET, ApiGiftController::GIFT_API_PATH . '/event/' . self::$eventId);
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
 
@@ -43,7 +43,7 @@ class ApiGiftControllerTest extends WebTestCase {
      * @covers ::getGifts
      */
     public function testGetGiftsError(): void{
-        self::$client->request(Request::METHOD_GET, ApiGiftController::GIFT_API_PATH . '/' . self::$eventIdError);
+        self::$client->request(Request::METHOD_GET, ApiGiftController::GIFT_API_PATH . '/event/' . self::$eventIdError);
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
