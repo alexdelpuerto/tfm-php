@@ -14,12 +14,14 @@ class ApiEventControllerTest extends WebTestCase{
 
     public static $userId;
     public static $userIdError;
+    public static $eventId;
 
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
         self::$userId = 9;
-        self::$userIdError = 2;
+        self::$userIdError = 4;
+        self::$eventId = 3;
     }
 
     /**
@@ -27,7 +29,7 @@ class ApiEventControllerTest extends WebTestCase{
      * @covers ::getEvents
      */
     public function testGetEvents(): void{
-        self::$client->request(Request::METHOD_GET, ApiEventController::EVENT_API_PATH . '/' . self::$userId);
+        self::$client->request(Request::METHOD_GET, ApiEventController::EVENT_API_PATH . '/user/' . self::$userId);
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
 
@@ -41,7 +43,7 @@ class ApiEventControllerTest extends WebTestCase{
      * @covers ::getEvents
      */
     public function testGetEventsError(): void{
-        self::$client->request(Request::METHOD_GET, ApiEventController::EVENT_API_PATH . '/' . self::$userIdError);
+        self::$client->request(Request::METHOD_GET, ApiEventController::EVENT_API_PATH . '/user/' . self::$userIdError);
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
         $body = self::$client->getResponse()->getContent();
         self::assertJson($body);
@@ -87,5 +89,58 @@ class ApiEventControllerTest extends WebTestCase{
         self::$client->request(Request::METHOD_POST, ApiEventController::EVENT_API_PATH,
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testGetAEvent
+     * @covers ::getAEvent
+     */
+    public function testGetAEvent(): void {
+        self::$client->request(Request::METHOD_GET, ApiEventController::EVENT_API_PATH . '/' . self::$eventId);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+        $body = self::$client->getResponse()->getContent();
+        self::assertJson($body);
+
+        $data = json_decode($body, true);
+        self::assertArrayHasKey('event', $data);
+        self::assertEquals(self::$eventId, $data['event']['id']);
+        self::assertEquals(Response::HTTP_OK, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testOptionsEvent
+     * @covers ::optionsEvent
+     */
+    public function testOptionsEvent(): void {
+        self::$client->request(Request::METHOD_OPTIONS, ApiEventController::EVENT_API_PATH . '/' . self::$eventId);
+        $head = self::$client->getResponse()->headers->get("Allow");
+        self::assertEquals($this->optionsEvents(), $head);
+    }
+
+    /**
+     * Implements testPutEvent
+     * @covers ::putEvent
+     */
+    public function testPutEvent(): int {
+        $data = [
+            'name'=> 'event2',
+            'budget'=>22.3
+        ];
+
+        self::$client->request(Request::METHOD_PUT, ApiEventController::EVENT_API_PATH . '/' . self::$eventId,
+            [],[],[],json_encode($data));
+        self::assertEquals(209, self::$client->getResponse()->getStatusCode());
+
+        $body = self::$client->getResponse()->getContent();
+        $dataDecoder = json_decode($body, true);
+        return $dataDecoder['event']['id'];
+    }
+
+    private function optionsEvents(): string {
+        return
+            Request::METHOD_GET . ', ' .
+            Request::METHOD_PUT . ', ' .
+            Request::METHOD_DELETE . ', ' .
+            Request::METHOD_OPTIONS;
     }
 }
