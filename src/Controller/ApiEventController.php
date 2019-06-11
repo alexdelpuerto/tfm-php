@@ -22,7 +22,7 @@ class ApiEventController extends AbstractController {
     /**
      * @param int $userId
      * @return Response
-     * @Route(path="/{userId}", name="get", methods={"GET"})
+     * @Route(path="/user/{userId}", name="getEvents", methods={"GET"})
      */
     public function getEvents(int $userId): Response {
         $em = $this->getDoctrine()->getManager();
@@ -65,6 +65,60 @@ class ApiEventController extends AbstractController {
             return new JsonResponse(
                 ['event' => $event],
                 Response::HTTP_CREATED
+            );
+        }
+    }
+
+    /**
+     * @param int $eventId
+     * @return Response
+     * @Route(path="/{eventId}", name="getEvent", methods={"GET"})
+     */
+    public function getAEvent(int $eventId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Event::class)->find($eventId);
+
+        if($event != null){
+            return new JsonResponse(['event' => $event], Response::HTTP_OK);
+        }
+    }
+
+    /**
+     * @param int $eventId
+     * @return Response
+     * @Route(path="/{eventId}", name="options", methods={"OPTIONS"})
+     */
+    public function optionsEvent(int $eventId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository(Event::class)->find($eventId);
+
+        if($result != null){
+            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
+        }
+    }
+
+    /**
+     * @param int $eventId
+     * @param Request $request
+     * @return Response
+     * @Route(path="/{eventId}", name="put", methods={"PUT"})
+     */
+    public function putEvent(int $eventId, Request $request): Response {
+        $em= $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Event::class)->find($eventId);
+
+        if($event != null) {
+            $dataRequest = $request->getContent();
+            $data = json_decode($dataRequest, true);
+
+            $event->setName($data['name']);
+            $event->setBudget($data['budget']);
+
+            $em->persist($event);
+            $em->flush();
+
+            return new JsonResponse(
+                ['event' => $event], 209
             );
         }
     }
