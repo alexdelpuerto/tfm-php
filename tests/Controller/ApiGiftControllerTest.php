@@ -15,6 +15,7 @@ class ApiGiftControllerTest extends WebTestCase {
     public static $eventId;
     public static $eventIdError;
     public static $giftId;
+    public static $giftIdError;
 
 
     public static function setUpBeforeClass(){
@@ -22,6 +23,7 @@ class ApiGiftControllerTest extends WebTestCase {
         self::$eventId = 2;
         self::$eventIdError = 6;
         self::$giftId = 6;
+        self::$giftIdError = 60;
     }
 
     /**
@@ -137,6 +139,24 @@ class ApiGiftControllerTest extends WebTestCase {
         $body = self::$client->getResponse()->getContent();
         $dataDecoder = json_decode($body, true);
         return $dataDecoder['gift']['id'];
+    }
+
+    /**
+     * Implements testDeleteGift
+     * @covers ::deleteGift
+     */
+    public function testDeleteGift(): void {
+        self::$client->request(Request::METHOD_DELETE, ApiGiftController::GIFT_API_PATH . '/' . self::$giftId);
+        self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testDeleteGiftError
+     * @covers ::deleteGift
+     */
+    public function testDeleteGiftError(): void {
+        self::$client->request(Request::METHOD_DELETE, ApiGiftController::GIFT_API_PATH . '/' . self::$giftIdError);
+        self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
     }
 
     private function optionsGifts(): string {
