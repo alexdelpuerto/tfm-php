@@ -31,7 +31,7 @@ class ApiGiftController extends AbstractController {
         $gifts = $event->getGifts()->getValues();
 
         return (empty($gifts))
-            ? $this->error404()
+            ? $this->error404event()
             : new JsonResponse(['gifts'=> $gifts],
                 Response::HTTP_OK);
     }
@@ -103,7 +103,7 @@ class ApiGiftController extends AbstractController {
      * @Route(path="/{giftId}", name="put", methods={"PUT"})
      */
     public function putGift(int $giftId, Request $request): Response {
-        $em= $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $gift = $em->getRepository(Gift::class)->find($giftId);
 
         if($gift != null) {
@@ -123,7 +123,34 @@ class ApiGiftController extends AbstractController {
         }
     }
 
+    /**
+     * @param int $giftId
+     * @return Response
+     * @Route(path="/{giftId}", name="delete", methods={"DELETE"})
+     */
+    public function deleteGift(int $giftId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $gift = $em->getRepository(Gift::class)->find($giftId);
+
+        if($gift != null) {
+            $em->remove($gift);
+            $em->flush();
+
+            return new JsonResponse([], Response::HTTP_NO_CONTENT);
+        } else {
+            return $this->error404();
+        }
+    }
+
     private function error404(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_NOT_FOUND,
+            'message' => "El regalo no existe"
+        ];
+        return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+    }
+
+    private function error404event(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
             'message' => "No hay regalos para el evento buscado"
