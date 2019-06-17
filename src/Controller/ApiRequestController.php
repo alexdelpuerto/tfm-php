@@ -84,11 +84,12 @@ class ApiRequestController extends AbstractController {
             $em->persist($userExist);
             $em->flush();
 
-            /*  Cuando se añade a amigos, hay que borrar la solicitud.
-                El método cancelRequest también se llama al pulsar sobre cancel, en las peticiones.
+            $friendRequest = $em->getRepository(Friendrequest::class)->
+                findOneBy(array('userSend' => $data['userSend'], 'userReceive' => $data['userReceive']));
 
-                $this->cancelRequest($data);
-            */
+            $requestId = $friendRequest->getId();
+
+            $this->cancelRequest($requestId);
 
             return new JsonResponse(
                 [],Response::HTTP_CREATED
@@ -96,8 +97,19 @@ class ApiRequestController extends AbstractController {
         }
     }
 
-    public function cancelRequest(Request $request): Response{
+    /**
+     * @param int $requestId
+     * @return Response
+     * @Route(path="/{requestId}", name="cancel", methods={"DELETE"})
+     */
+    public function cancelRequest(int $requestId): Response{
+        $em = $this->getDoctrine()->getManager();
+        $friendRequest = $em->getRepository(Friendrequest::class)->find($requestId);
 
+        $em->remove($friendRequest);
+        $em->flush();
+
+        return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
 
     private function error404(): JsonResponse{
