@@ -15,6 +15,8 @@ class ApiEventControllerTest extends WebTestCase{
     public static $userId;
     public static $userIdError;
     public static $eventId;
+    public static $eventIdDelete;
+    public static $eventIdError;
 
 
     public static function setUpBeforeClass(){
@@ -22,6 +24,8 @@ class ApiEventControllerTest extends WebTestCase{
         self::$userId = 9;
         self::$userIdError = 4;
         self::$eventId = 3;
+        self::$eventIdDelete = 10;
+        self::$eventIdError = 20;
     }
 
     /**
@@ -134,6 +138,24 @@ class ApiEventControllerTest extends WebTestCase{
         $body = self::$client->getResponse()->getContent();
         $dataDecoder = json_decode($body, true);
         return $dataDecoder['event']['id'];
+    }
+
+    /**
+     * Implements testDeleteEvent
+     * @covers ::deleteEvent
+     */
+    public function testDeleteEvent(): void {
+        self::$client->request(Request::METHOD_DELETE, ApiEventController::EVENT_API_PATH . '/' . self::$eventIdDelete);
+        self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testDeleteEventError
+     * @covers ::deleteEvent
+     */
+    public function testDeleteEventError(): void{
+        self::$client->request(Request::METHOD_DELETE, ApiEventController::EVENT_API_PATH . '/' . self::$eventIdError);
+        self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
     }
 
     private function optionsEvents(): string {
