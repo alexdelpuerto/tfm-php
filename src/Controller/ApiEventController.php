@@ -30,7 +30,7 @@ class ApiEventController extends AbstractController {
         $events = $user->getEvent()->getValues();
 
         return (empty($events))
-            ? $this->error404()
+            ? $this->error404user()
             : new JsonResponse(['events'=> $events],
                 Response::HTTP_OK);
     }
@@ -123,10 +123,37 @@ class ApiEventController extends AbstractController {
         }
     }
 
+    /**
+     * @param int $eventId
+     * @return Response
+     * @Route(path="/{eventId}", name="delete", methods={"DELETE"})
+     */
+    public function deleteEvent(int $eventId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Event::class)->find($eventId);
+
+        if($event != null){
+            $em->remove($event);
+            $em->flush();
+
+            return new JsonResponse([], Response::HTTP_NO_CONTENT);
+        } else {
+            return $this->error404();
+        }
+    }
+
+    private function error404user(): JsonResponse{
+        $message = [
+            'code' => Response::HTTP_NOT_FOUND,
+            'message' => "No hay eventos para este usuario"
+        ];
+        return new JsonResponse($message, Response::HTTP_NOT_FOUND);
+    }
+
     private function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
-            'message' => "No hay eventos para el usuario buscado"
+            'message' => "El evento no existe"
         ];
         return new JsonResponse($message, Response::HTTP_NOT_FOUND);
     }
