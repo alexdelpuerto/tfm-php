@@ -15,11 +15,13 @@ class ApiRequestControllerTest extends WebTestCase{
 
     public static $username;
     public static $usernameError;
+    public static $requestId;
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
         self::$username = 'user7';
         self::$usernameError = 'asdf';
+        self::$requestId = 5;
     }
 
     /**
@@ -114,5 +116,14 @@ class ApiRequestControllerTest extends WebTestCase{
         self::$client->request(Request::METHOD_POST, ApiRequestController::REQUEST_API_PATH . '/accept',
             [], [], [], json_encode($data));
         self::assertEquals(Response::HTTP_NOT_FOUND, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testCancelRequest
+     * @covers ::cancelRequest
+     */
+    public function testCancelRequest(): void {
+        self::$client->request(Request::METHOD_DELETE, ApiRequestController::REQUEST_API_PATH . '/' . self::$requestId);
+        self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
     }
 }
