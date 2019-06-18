@@ -224,6 +224,36 @@ class ApiUserController extends AbstractController {
         }
     }
 
+    /**
+     * @param int $userId
+     * @param Request $request
+     * @return Response
+     * @Route(path="/{userId}/friends", name="deleteFriend", methods={"DELETE"})
+     */
+    public function deleteFriend(int $userId, Request $request): Response {
+        $dataRequest = $request->getContent();
+        $data = json_decode($dataRequest, true);
+        $friend = $data['friend'];
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($userId);
+        $friend = $em->getRepository(User::class)->find($friend);
+        $user->removeFriend($friend);
+
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @return Response
+     * @Route(path="/{userId}/friends", name="optionsFriend", methods={"OPTIONS"})
+     */
+    public function optionsFriend(): Response {
+        return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
+    }
+
     public function error404login(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,
