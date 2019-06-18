@@ -112,6 +112,20 @@ class ApiRequestController extends AbstractController {
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
 
+    /**
+     * @param int $requestId
+     * @return Response
+     * @Route(path="/{requestId}", name="options", methods={"OPTIONS"})
+     */
+    public function optionsRequest(int $requestId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository(Friendrequest::class)->find($requestId);
+
+        if($result != null){
+            return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
+        }
+    }
+
     private function error404(): JsonResponse{
         $message = [
             'code' => Response::HTTP_NOT_FOUND,

@@ -126,4 +126,22 @@ class ApiRequestControllerTest extends WebTestCase{
         self::$client->request(Request::METHOD_DELETE, ApiRequestController::REQUEST_API_PATH . '/' . self::$requestId);
         self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
     }
+
+    /**
+     * Implements testOptionsRequest
+     * @covers ::optionsRequest
+     */
+    public function testOptionsRequest(): void {
+        self::$client->request(Request::METHOD_OPTIONS, ApiRequestController::REQUEST_API_PATH . '/' . self::$requestId);
+        $head = self::$client->getResponse()->headers->get("Allow");
+        self::assertEquals($this->optionsRequest(), $head);
+    }
+
+    public function optionsRequest():string {
+        return
+            Request::METHOD_GET . ', ' .
+            Request::METHOD_PUT . ', ' .
+            Request::METHOD_DELETE . ', ' .
+            Request::METHOD_OPTIONS;
+    }
 }
