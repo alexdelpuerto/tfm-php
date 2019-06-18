@@ -23,6 +23,7 @@ class ApiUserControllerTest extends WebTestCase{
     public static $searchUserError;
     public static $eventId;
     public static $userId;
+    public static $friendId;
 
     public static function setUpBeforeClass(){
         self::$client = static::createClient();
@@ -33,6 +34,7 @@ class ApiUserControllerTest extends WebTestCase{
         self::$searchUserError = '55';
         self::$eventId = 2;
         self::$userId = 9;
+        self::$friendId = 1;
     }
 
     /**
@@ -292,11 +294,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::deleteFriend
      */
     public function testDeleteFriend(): void {
-        $data = [
-            'friend' => 1
-        ];
-        self::$client->request(Request::METHOD_DELETE, ApiUserController::USER_API_PATH . '/' . self::$userId . '/friends',
-            [],[],[], json_encode($data));
+        self::$client->request(Request::METHOD_DELETE, ApiUserController::USER_API_PATH . '/' . self::$userId . '/friends/' . self::$friendId);
         self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
     }
 
@@ -305,7 +303,7 @@ class ApiUserControllerTest extends WebTestCase{
      * @covers ::optionsFriend
      */
     public function testOptionsFriend(): void {
-        self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/' . self::$userId. '/friends');
+        self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/' . self::$userId. '/friends/' . self::$friendId);
         $head = self::$client->getResponse()->headers->get("Allow");
         self::assertEquals($this->optionsUsers(), $head);
     }

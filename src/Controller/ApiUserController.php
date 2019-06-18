@@ -226,21 +226,19 @@ class ApiUserController extends AbstractController {
 
     /**
      * @param int $userId
-     * @param Request $request
+     * @param int $friend
      * @return Response
-     * @Route(path="/{userId}/friends", name="deleteFriend", methods={"DELETE"})
+     * @Route(path="/{userId}/friends/{friend}", name="deleteFriend", methods={"DELETE"})
      */
-    public function deleteFriend(int $userId, Request $request): Response {
-        $dataRequest = $request->getContent();
-        $data = json_decode($dataRequest, true);
-        $friend = $data['friend'];
-
+    public function deleteFriend(int $userId, int $friend): Response {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($userId);
         $friend = $em->getRepository(User::class)->find($friend);
         $user->removeFriend($friend);
+        $friend->removeFriend($user);
 
         $em->persist($user);
+        $em->persist($friend);
         $em->flush();
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
@@ -248,7 +246,7 @@ class ApiUserController extends AbstractController {
 
     /**
      * @return Response
-     * @Route(path="/{userId}/friends", name="optionsFriend", methods={"OPTIONS"})
+     * @Route(path="/{userId}/friends/{friend}", name="optionsFriend", methods={"OPTIONS"})
      */
     public function optionsFriend(): Response {
         return new JsonResponse(null, 200, ['Allow'=> 'GET, PUT, DELETE, OPTIONS']);
