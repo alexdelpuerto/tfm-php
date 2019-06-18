@@ -216,6 +216,10 @@ class User implements \JsonSerializable
         return $this;
     }
 
+    public function removeFriend(User $user){
+        $this->myFriends->removeElement($user);
+    }
+
     public function jsonSerialize()
     {
         return array(
