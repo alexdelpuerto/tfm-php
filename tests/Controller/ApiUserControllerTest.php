@@ -287,6 +287,29 @@ class ApiUserControllerTest extends WebTestCase{
         self::assertEquals(Response::HTTP_BAD_REQUEST, self::$client->getResponse()->getStatusCode());
     }
 
+    /**
+     * Implements testDeleteFriend
+     * @covers ::deleteFriend
+     */
+    public function testDeleteFriend(): void {
+        $data = [
+            'friend' => 1
+        ];
+        self::$client->request(Request::METHOD_DELETE, ApiUserController::USER_API_PATH . '/' . self::$userId . '/friends',
+            [],[],[], json_encode($data));
+        self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Implements testOptionsFriend
+     * @covers ::optionsFriend
+     */
+    public function testOptionsFriend(): void {
+        self::$client->request(Request::METHOD_OPTIONS, ApiUserController::USER_API_PATH . '/' . self::$userId. '/friends');
+        $head = self::$client->getResponse()->headers->get("Allow");
+        self::assertEquals($this->optionsUsers(), $head);
+    }
+
     public function optionsUsers():string {
         return
             Request::METHOD_GET . ', ' .
