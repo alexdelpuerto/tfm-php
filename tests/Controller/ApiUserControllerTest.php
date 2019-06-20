@@ -290,6 +290,14 @@ class ApiUserControllerTest extends WebTestCase{
     }
 
     /**
+     * Implements testDeleteUser
+     */
+    public function testDeleteUser(): void {
+        self::$client->request(Request::METHOD_DELETE, ApiUserController::USER_API_PATH . '/' . self::$userId);
+        self::assertEquals(Response::HTTP_NO_CONTENT, self::$client->getResponse()->getStatusCode());
+    }
+
+    /**
      * Implements testDeleteFriend
      * @covers ::deleteFriend
      */
