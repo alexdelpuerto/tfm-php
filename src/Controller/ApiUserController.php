@@ -226,6 +226,23 @@ class ApiUserController extends AbstractController {
 
     /**
      * @param int $userId
+     * @return Response
+     * @Route(path="/{userId}", name="delete", methods={"DELETE"})
+     */
+    public function deleteUser(int $userId): Response {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($userId);
+
+        if($user != null){
+            $em->remove($user);
+            $em->flush();
+
+            return new JsonResponse([], Response::HTTP_NO_CONTENT);
+        }
+    }
+
+    /**
+     * @param int $userId
      * @param int $friend
      * @return Response
      * @Route(path="/{userId}/friends/{friend}", name="deleteFriend", methods={"DELETE"})
