@@ -1,0 +1,1234 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Trabajo de Fin de Master",
+    "description": "Gestor de eventos y regalos",
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Register a new user",
+        "description": "Register a new user",
+        "operationId": "api_user_register",
+        "responses": {
+          "201": {
+            "description": "`Created` User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`Bad Request` Username already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserData"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/UserData"
+              }
+            }
+          },
+          "description": "`User` properties to add to the system",
+          "required": true
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login an existing user",
+        "description": "Login an existing user",
+        "operationId": "api_user_login",
+        "responses": {
+          "200": {
+            "description": "`Ok` User loggued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLogin"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLogin"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLogin"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`Not Found` Incorrect username or password.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          },
+          "description": "`User` properties to log into the system",
+          "required": true
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns a user based on a single ID",
+        "description": "Returns the user identified by `userId`.",
+        "operationId": "api_user_getUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Updates a user",
+        "description": "Updates the user identified by `userId`.",
+        "operationId": "api_user_put",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "209": {
+            "description": "`Content Returned` User previously existed and is now updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`Bad Request` Username already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserData"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/UserData"
+              }
+            }
+          },
+          "description": "`User` data to update",
+          "required": true
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Deletes a user",
+        "description": "Deletes the user identified by `userId`.",
+        "operationId": "api_user_delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Provides the list of HTTP supported methods",
+        "description": "Return a `Allow` header with a list of HTTP supported methods.",
+        "operationId": "api_user_optionsUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Allow` header ",
+            "headers": {
+              "allow": {
+                "description": "List of HTTP supported methods",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{username}/search/{search}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns a list of users based on a search except the username actual",
+        "description": "Returns a list of users based on a search except the username actual.",
+        "operationId": "api_user_search",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/username"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`Not Found` No results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/friends/{username}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns a list of user friends based on the username",
+        "description": "Returns a list of user friends based on the username.",
+        "operationId": "api_user_getFriends",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`Not Found` No results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/friends/{friend}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete a friend from the user based on the friendId and the userId",
+        "description": "Delete a friend from the user based on the friendId and the userId.",
+        "operationId": "api_user_deleteFriend",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/friend"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Friend deleted"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Provides the list of HTTP supported methods",
+        "description": "Return a `Allow` header with a list of HTTP supported methods.",
+        "operationId": "api_user_optionsFriend",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/friend"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Allow` header ",
+            "headers": {
+              "allow": {
+                "description": "List of HTTP supported methods",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/event/{eventId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns a list of users belonging to an event",
+        "description": "Returns a list of users belonging to an event.",
+        "operationId": "api_user_getUsers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/eventId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersArray"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add a user to the event",
+        "description": "Add a user to the event.",
+        "operationId": "api_user_add",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/eventId"
+          }
+        ],
+        "responses": {
+          "209": {
+            "description": "`Content Returned` User previously existed and is now updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserID"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/UserID"
+              }
+            }
+          },
+          "description": "`User` data to update",
+          "required": true
+        }
+      },
+      "options": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Provides the list of HTTP supported methods",
+        "description": "Return a `Allow` header with a list of HTTP supported methods.",
+        "operationId": "api_user_optionsUsers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/eventId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Allow` header ",
+            "headers": {
+              "allow": {
+                "description": "List of HTTP supported methods",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Register a new event",
+        "description": "Register a new event",
+        "operationId": "api_event_post",
+        "responses": {
+          "201": {
+            "description": "`Created` Event created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`Bad Request` Creator does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          },
+          "description": "`Event` properties to add to the system",
+          "required": true
+        }
+      },
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Returns all results",
+        "description": "Returns all results from the system that the user has access to.",
+        "operationId": "api_event_getEvent",
+        "responses": {
+          "200": {
+            "description": "Result array response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultsArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultsArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultsArray"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+          }
+        },
+        "security": [
+          {
+            "UPM_API_Security": []
+          }
+        ]
+      }
+    },
+    "/results/{resultId}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Returns a result based on a single ID",
+        "description": "Returns the result identified by `resultId`.",
+        "operationId": "api_result_get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/resultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+          }
+        },
+        "security": [
+          {
+            "UPM_API_Security": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Updates a result",
+        "description": "Updates the result identified by `resultId`.",
+        "operationId": "api_result_put",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/resultId"
+          }
+        ],
+        "responses": {
+          "209": {
+            "description": "`Content Returned` User previously existed and is now updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+          }
+        },
+        "security": [
+          {
+            "UPM_API_Security": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultData"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultData"
+              }
+            }
+          },
+          "description": "`Result` data to update",
+          "required": true
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Deletes a result",
+        "description": "Deletes the user identified by `resultId`.",
+        "operationId": "apie_result_delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/resultId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Result deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+          }
+        },
+        "security": [
+          {
+            "UPM_API_Security": []
+          }
+        ]
+      },
+      "options": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Provides the list of HTTP supported methods",
+        "description": "Return a `Allow` header with a list of HTTP supported methods.",
+        "operationId": "api_result_options",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/resultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Allow` header ",
+            "headers": {
+              "allow": {
+                "description": "List of HTTP supported methods",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "User management"
+    },
+    {
+      "name": "Events",
+      "description": "Events management"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:8000/api/v1"
+    },
+    {
+      "url": "https://localhost:8000/api/v1"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "userId": {
+        "name": "userId",
+        "in": "path",
+        "description": "ID of user",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "username": {
+        "name": "username",
+        "in": "path",
+        "description": "username",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "search": {
+        "name": "search",
+        "in": "path",
+        "description": "a string to search",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "friend": {
+        "name": "friend",
+        "in": "path",
+        "description": "ID of a friend",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "eventId": {
+        "name": "eventId",
+        "in": "path",
+        "description": "ID of event",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "resultId": {
+        "name": "resultId",
+        "in": "path",
+        "description": "ID of result",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "responses": {
+      "401_Unauthorized_Response": {
+        "description": "`Unauthorized` invalid `token` header",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "application/x-yaml": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "403_Forbidden_Response": {
+        "description": "`Forbidden` You don't have permission to access",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "application/x-yaml": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      },
+      "404_Resource_Not_Found_Response": {
+        "description": "`Not found` resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "application/x-yaml": {
+            "schema": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "UPM_API_Security": {
+        "type": "apiKey",
+        "name": "token",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "User": {
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties": {
+          "id": {
+            "description": "User Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "description": "Username",
+            "type": "string"
+          },
+          "password": {
+            "description": "User password",
+            "type": "string"
+          },
+          "name": {
+            "description": "User name",
+            "type": "string"
+          },
+          "surname": {
+            "description": "User surname",
+            "type": "string"
+          }
+        },
+        "example": {
+          "user": {
+            "username": "username",
+            "password": "pass",
+            "name": "name",
+            "surname": "surname"
+          }
+        }
+      },
+      "UserData": {
+        "properties": {
+          "username": {
+            "description": "Username",
+            "type": "string"
+          },
+          "password": {
+            "description": "User password",
+            "type": "string"
+          },
+          "name": {
+            "description": "User name",
+            "type": "string"
+          },
+          "surname": {
+            "description": "User surname",
+            "type": "string"
+          }
+        },
+        "example": {
+          "username": "username",
+          "password": "pass",
+          "name": "name",
+          "surname": "surname"
+        }
+      },
+      "UserLogin": {
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties": {
+          "username": {
+            "description": "Username",
+            "type": "string"
+          },
+          "password": {
+            "description": "User password",
+            "type": "string"
+          }
+        },
+        "example": {
+          "user": {
+            "username": "username",
+            "password": "pass"
+          }
+        }
+      },
+      "UsersArray": {
+        "properties": {
+          "users": {
+            "description": "Users array",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "UserID": {
+        "properties": {
+          "id": {
+            "description": "id",
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "id": 5
+        }
+      },
+      "Event": {
+        "required": [
+          "name",
+          "budget",
+          "creator"
+        ],
+        "properties": {
+          "id": {
+            "description": "Event Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "description": "Event name",
+            "type": "string"
+          },
+          "budget": {
+            "description": "Event budget",
+            "type": "number"
+          },
+          "creator": {
+            "description": "Event creator",
+            "type": "string"
+          }
+        },
+        "example": {
+          "event": {
+            "name": "event",
+            "budget": 20.6,
+            "creator": "user"
+          }
+        }
+      },
+      "Result": {
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "description": "Result Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "description": "Result number",
+            "type": "integer"
+          },
+          "userId": {
+            "description": "User Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "time": {
+            "description": "Datetime and hour",
+            "type": "string",
+            "format": "time"
+          }
+        },
+        "example": {
+          "result": {
+            "id": 1000,
+            "result": 20,
+            "userId": 1,
+            "time": 1544529600000
+          }
+        }
+      },
+      "ResultData": {
+        "properties": {
+          "result": {
+            "description": "Result number",
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "description": "User Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "time": {
+            "description": "Datetime and hour",
+            "type": "string",
+            "format": "time"
+          }
+        },
+        "example": {
+          "result": 20,
+          "userId": 2,
+          "time": 1544529600000
+        }
+      },
+      "ResultsArray": {
+        "properties": {
+          "results": {
+            "description": "Results array",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Result"
+            }
+          }
+        }
+      },
+      "Message": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "description": "Response code",
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "description": "Response message",
+            "type": "string"
+          }
+        },
+        "example": {
+          "message": {
+            "code": "HTTP code",
+            "message": "Response Message"
+          }
+        }
+      }
+    }
+  }
+}
