@@ -647,146 +647,149 @@
           "description": "`Event` properties to add to the system",
           "required": true
         }
-      },
-      "get": {
-        "tags": [
-          "Events"
-        ],
-        "summary": "Returns all results",
-        "description": "Returns all results from the system that the user has access to.",
-        "operationId": "api_event_getEvent",
-        "responses": {
-          "200": {
-            "description": "Result array response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultsArray"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultsArray"
-                }
-              },
-              "application/x-yaml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultsArray"
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
-          }
-        },
-        "security": [
-          {
-            "UPM_API_Security": []
-          }
-        ]
       }
     },
-    "/results/{resultId}": {
+    "/events/user/{userId}": {
       "get": {
         "tags": [
           "Events"
         ],
-        "summary": "Returns a result based on a single ID",
-        "description": "Returns the result identified by `resultId`.",
-        "operationId": "api_result_get",
+        "summary": "Returns all events from a user",
+        "description": "Returns all events from a user",
+        "operationId": "api_event_getEvents",
         "parameters": [
           {
-            "$ref": "#/components/parameters/resultId"
+            "$ref": "#/components/parameters/userId"
           }
         ],
         "responses": {
           "200": {
-            "description": "Result",
+            "description": "`Ok`",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "$ref": "#/components/schemas/EventsArray"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "$ref": "#/components/schemas/EventsArray"
                 }
               },
               "application/x-yaml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "$ref": "#/components/schemas/EventsArray"
                 }
               }
             }
           },
           "404": {
-            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+            "description": "`Not Found` No events for this user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
           }
-        },
-        "security": [
+        }
+      }
+    },
+    "/events/{eventId}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Returns an event based on a single ID",
+        "description": "Returns the event identified by `eventId`.",
+        "operationId": "api_event_getEvent",
+        "parameters": [
           {
-            "UPM_API_Security": []
+            "$ref": "#/components/parameters/eventId"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
       },
       "put": {
         "tags": [
           "Events"
         ],
-        "summary": "Updates a result",
-        "description": "Updates the result identified by `resultId`.",
-        "operationId": "api_result_put",
+        "summary": "Updates an event",
+        "description": "Updates the event identified by `eventId`.",
+        "operationId": "api_event_put",
         "parameters": [
           {
-            "$ref": "#/components/parameters/resultId"
+            "$ref": "#/components/parameters/eventId"
           }
         ],
         "responses": {
           "209": {
-            "description": "`Content Returned` User previously existed and is now updated",
+            "description": "`Content Returned` Event previously existed and is now updated",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "$ref": "#/components/schemas/Event"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "$ref": "#/components/schemas/Event"
                 }
               },
               "application/x-yaml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "$ref": "#/components/schemas/Event"
                 }
               }
             }
-          },
-          "404": {
-            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
           }
         },
-        "security": [
-          {
-            "UPM_API_Security": []
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResultData"
+                "$ref": "#/components/schemas/Event"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/ResultData"
+                "$ref": "#/components/schemas/Event"
               }
             }
           },
-          "description": "`Result` data to update",
+          "description": "`Event` data to update",
           "required": true
         }
       },
@@ -794,27 +797,22 @@
         "tags": [
           "Events"
         ],
-        "summary": "Deletes a result",
-        "description": "Deletes the user identified by `resultId`.",
-        "operationId": "apie_result_delete",
+        "summary": "Deletes an event",
+        "description": "Deletes the event identified by `eventId`.",
+        "operationId": "api_event_delete",
         "parameters": [
           {
-            "$ref": "#/components/parameters/resultId"
+            "$ref": "#/components/parameters/eventId"
           }
         ],
         "responses": {
           "204": {
-            "description": "Result deleted"
+            "description": "Event deleted"
           },
           "404": {
             "$ref": "#/components/responses/404_Resource_Not_Found_Response"
           }
-        },
-        "security": [
-          {
-            "UPM_API_Security": []
-          }
-        ]
+        }
       },
       "options": {
         "tags": [
@@ -822,10 +820,10 @@
         ],
         "summary": "Provides the list of HTTP supported methods",
         "description": "Return a `Allow` header with a list of HTTP supported methods.",
-        "operationId": "api_result_options",
+        "operationId": "api_event_options",
         "parameters": [
           {
-            "$ref": "#/components/parameters/resultId"
+            "$ref": "#/components/parameters/eventId"
           }
         ],
         "responses": {
@@ -839,9 +837,131 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/gifts": {
+      "post": {
+        "tags": [
+          "Gifts"
+        ],
+        "summary": "Register a new gift",
+        "description": "Register a new gift",
+        "operationId": "api_gift_post",
+        "responses": {
+          "201": {
+            "description": "`Created` Gift created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`Bad Request` Event does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Gift"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Gift"
+              }
+            }
+          },
+          "description": "`Gift` properties to add to the system",
+          "required": true
+        }
+      }
+    },
+    "/gifts/event/{eventId}": {
+      "get": {
+        "tags": [
+          "Gifts"
+        ],
+        "summary": "Returns all gifts from an event",
+        "description": "Returns all gifts from an event",
+        "operationId": "api_gift_getGifts",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/eventId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftsArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftsArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftsArray"
+                }
+              }
+            }
           },
           "404": {
-            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+            "description": "`Not Found` No gifts for this event",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
           }
         }
       }
@@ -855,6 +975,10 @@
     {
       "name": "Events",
       "description": "Events management"
+    },
+    {
+      "name": "Gifts",
+      "description": "Gifts management"
     }
   ],
   "servers": [
@@ -914,59 +1038,9 @@
           "type": "integer",
           "format": "int32"
         }
-      },
-      "resultId": {
-        "name": "resultId",
-        "in": "path",
-        "description": "ID of result",
-        "required": true,
-        "schema": {
-          "type": "integer",
-          "format": "int32"
-        }
       }
     },
     "responses": {
-      "401_Unauthorized_Response": {
-        "description": "`Unauthorized` invalid `token` header",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Message"
-            }
-          },
-          "application/xml": {
-            "schema": {
-              "$ref": "#/components/schemas/Message"
-            }
-          },
-          "application/x-yaml": {
-            "schema": {
-              "$ref": "#/components/schemas/Message"
-            }
-          }
-        }
-      },
-      "403_Forbidden_Response": {
-        "description": "`Forbidden` You don't have permission to access",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Message"
-            }
-          },
-          "application/xml": {
-            "schema": {
-              "$ref": "#/components/schemas/Message"
-            }
-          },
-          "application/x-yaml": {
-            "schema": {
-              "$ref": "#/components/schemas/Message"
-            }
-          }
-        }
-      },
       "404_Resource_Not_Found_Response": {
         "description": "`Not found` resource not found",
         "content": {
@@ -986,13 +1060,6 @@
             }
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "UPM_API_Security": {
-        "type": "apiKey",
-        "name": "token",
-        "in": "header"
       }
     },
     "schemas": {
@@ -1137,71 +1204,68 @@
           }
         }
       },
-      "Result": {
+      "EventsArray": {
+        "properties": {
+          "events": {
+            "description": "Events array",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          }
+        }
+      },
+      "Gift": {
         "required": [
-          "id"
+          "name",
+          "price",
+          "eventId"
         ],
         "properties": {
           "id": {
-            "description": "Result Id",
+            "description": "Gift Id",
             "type": "integer",
             "format": "int32"
           },
-          "result": {
-            "description": "Result number",
-            "type": "integer"
+          "name": {
+            "description": "Gift name",
+            "type": "string"
           },
-          "userId": {
-            "description": "User Id",
+          "description": {
+            "description": "Gift description",
+            "type": "string"
+          },
+          "price": {
+            "description": "Gift price",
+            "type": "number"
+          },
+          "bought": {
+            "description": "Gift boolean",
+            "type": "boolean"
+          },
+          "eventId": {
+            "description": "event",
             "type": "integer",
             "format": "int32"
-          },
-          "time": {
-            "description": "Datetime and hour",
-            "type": "string",
-            "format": "time"
           }
         },
         "example": {
-          "result": {
-            "id": 1000,
-            "result": 20,
-            "userId": 1,
-            "time": 1544529600000
+          "gift": {
+            "name": "gift",
+            "description": "description",
+            "price": 2.6,
+            "bought": false,
+            "eventId": 2
           }
         }
       },
-      "ResultData": {
+      "GiftsArray": {
         "properties": {
-          "result": {
-            "description": "Result number",
-            "type": "integer",
-            "format": "int32"
-          },
-          "userId": {
-            "description": "User Id",
-            "type": "integer",
-            "format": "int32"
-          },
-          "time": {
-            "description": "Datetime and hour",
-            "type": "string",
-            "format": "time"
-          }
-        },
-        "example": {
-          "result": 20,
-          "userId": 2,
-          "time": 1544529600000
-        }
-      },
-      "ResultsArray": {
-        "properties": {
-          "results": {
-            "description": "Results array",
+          "gifts": {
+            "description": "Gifts array",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Result"
+              "$ref": "#/components/schemas/Gift"
             }
           }
         }
