@@ -965,6 +965,588 @@
           }
         }
       }
+    },
+    "/gifts/{giftId}": {
+      "get": {
+        "tags": [
+          "Gifts"
+        ],
+        "summary": "Returns a gift based on a single ID",
+        "description": "Returns the gift identified by `giftId`.",
+        "operationId": "api_gift_getGift",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/giftId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Gifts"
+        ],
+        "summary": "Updates a gift",
+        "description": "Updates the gift identified by `giftId`.",
+        "operationId": "api_gift_put",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/giftId"
+          }
+        ],
+        "responses": {
+          "209": {
+            "description": "`Content Returned` Gift previously existed and is now updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gift"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Gift"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Gift"
+              }
+            }
+          },
+          "description": "`Gift` data to update",
+          "required": true
+        }
+      },
+      "delete": {
+        "tags": [
+          "Gifts"
+        ],
+        "summary": "Deletes a gift",
+        "description": "Deletes the gift identified by `giftId`.",
+        "operationId": "api_gift_delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/giftId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Gift deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404_Resource_Not_Found_Response"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Gifts"
+        ],
+        "summary": "Provides the list of HTTP supported methods",
+        "description": "Return a `Allow` header with a list of HTTP supported methods.",
+        "operationId": "api_gift_options",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/giftId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Allow` header ",
+            "headers": {
+              "allow": {
+                "description": "List of HTTP supported methods",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Register a new gift payment",
+        "description": "Register a new gift payment",
+        "operationId": "api_payment_post",
+        "responses": {
+          "201": {
+            "description": "`Created` Payment created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            }
+          },
+          "description": "`Payment` properties to add to the system",
+          "required": true
+        }
+      }
+    },
+    "/paymentsCol/{username}": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Returns all collections from a user",
+        "description": "Returns all collections from a user",
+        "operationId": "api_payment_getCollections",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentsArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentsArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentsArray"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`Not Found` No collections for this username",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/{username}": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Returns all payments from a user",
+        "description": "Returns all payments from a user",
+        "operationId": "api_payment_getPayments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentsArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentsArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentsArray"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`Not Found` No payments for this username",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/{paymentId}": {
+      "delete": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Deletes a payment",
+        "description": "Deletes the payment identified by `paymentId`.",
+        "operationId": "api_payment_delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/paymentId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Payment deleted"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Provides the list of HTTP supported methods",
+        "description": "Return a `Allow` header with a list of HTTP supported methods.",
+        "operationId": "api_payment_options",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/paymentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Allow` header ",
+            "headers": {
+              "allow": {
+                "description": "List of HTTP supported methods",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requests": {
+      "post": {
+        "tags": [
+          "Requests"
+        ],
+        "summary": "Register a new friend request",
+        "description": "Register a new friend request",
+        "operationId": "api_request_post",
+        "responses": {
+          "201": {
+            "description": "`Created` Request created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Request"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Request"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Request"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "`Bad request` The request already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            }
+          },
+          "description": "`Request` properties to add to the system",
+          "required": true
+        }
+      }
+    },
+    "/requests/{username}": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "summary": "Returns all requests from a username",
+        "description": "Returns all requests from a username",
+        "operationId": "api_request_get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Ok`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestsArray"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestsArray"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestsArray"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`Not Found` No requests for this username",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requests/accept": {
+      "post": {
+        "tags": [
+          "Requests"
+        ],
+        "summary": "Accept a friend request",
+        "description": "Accept a friend request",
+        "operationId": "api_request_accept",
+        "responses": {
+          "201": {
+            "description": "`Created` Request accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Request"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Request"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`Not Found` The user does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/x-yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            }
+          },
+          "description": "`Request` properties to add to the system",
+          "required": true
+        }
+      }
+    },
+    "/requests/{requestId}": {
+      "delete": {
+        "tags": [
+          "Requests"
+        ],
+        "summary": "Cancel a request",
+        "description": "Cancel the request identified by `requestId`.",
+        "operationId": "api_request_cancel",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/requestId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request canceled"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Requests"
+        ],
+        "summary": "Provides the list of HTTP supported methods",
+        "description": "Return a `Allow` header with a list of HTTP supported methods.",
+        "operationId": "api_request_options",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/requestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`Allow` header ",
+            "headers": {
+              "allow": {
+                "description": "List of HTTP supported methods",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -979,6 +1561,14 @@
     {
       "name": "Gifts",
       "description": "Gifts management"
+    },
+    {
+      "name": "Payments",
+      "description": "Payments management"
+    },
+    {
+      "name": "Requests",
+      "description": "Friend requests"
     }
   ],
   "servers": [
@@ -1033,6 +1623,36 @@
         "name": "eventId",
         "in": "path",
         "description": "ID of event",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "giftId": {
+        "name": "giftId",
+        "in": "path",
+        "description": "ID of gift",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "paymentId": {
+        "name": "paymentId",
+        "in": "path",
+        "description": "ID of payment",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "requestId": {
+        "name": "requestId",
+        "in": "path",
+        "description": "ID of request",
         "required": true,
         "schema": {
           "type": "integer",
@@ -1266,6 +1886,94 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Gift"
+            }
+          }
+        }
+      },
+      "Payment": {
+        "required": [
+          "buyer",
+          "person",
+          "giftName",
+          "price"
+        ],
+        "properties": {
+          "id": {
+            "description": "Payment Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "buyer": {
+            "description": "Buyer of the gift",
+            "type": "string"
+          },
+          "person": {
+            "description": "User that has to pay",
+            "type": "string"
+          },
+          "giftName": {
+            "description": "Gift name",
+            "type": "string"
+          },
+          "price": {
+            "description": "Payment price",
+            "type": "number"
+          }
+        },
+        "example": {
+          "payment": {
+            "buyer": "user1",
+            "person": "user2",
+            "giftName": "gift",
+            "price": 2.2
+          }
+        }
+      },
+      "PaymentsArray": {
+        "properties": {
+          "payments": {
+            "description": "Payments array",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payment"
+            }
+          }
+        }
+      },
+      "Request": {
+        "required": [
+          "userSend",
+          "userReceive"
+        ],
+        "properties": {
+          "id": {
+            "description": "Request Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "userSend": {
+            "description": "User that sends the request",
+            "type": "string"
+          },
+          "userReceive": {
+            "description": "User that receive the request",
+            "type": "string"
+          }
+        },
+        "example": {
+          "request": {
+            "userSend": "user1",
+            "userReceive": "user2"
+          }
+        }
+      },
+      "RequestsArray": {
+        "properties": {
+          "requests": {
+            "description": "Requests array",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Request"
             }
           }
         }
