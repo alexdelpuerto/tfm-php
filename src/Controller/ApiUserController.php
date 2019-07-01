@@ -65,7 +65,7 @@ class ApiUserController extends AbstractController {
             $em->flush();
 
             return new JsonResponse(
-                ['user'=>$user],
+                ['userId'=>$user->getId()],
                 Response::HTTP_CREATED
             );
         }
